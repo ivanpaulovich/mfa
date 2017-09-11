@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  mfa.producer.webapi:
+    image: mfa.producer.webapi
+    build:
+      context: ./MFA.Producer.WebAPI
+      dockerfile: Dockerfile
+
+  mfa.auth.webapi:
+    image: mfa.auth.webapi
+    build:
+      context: ./MFA.Auth.WebAPI
+      dockerfile: Dockerfile
