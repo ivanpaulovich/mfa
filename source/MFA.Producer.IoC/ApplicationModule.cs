@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using MFA.Producer.Application.Queries;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,22 +19,19 @@ namespace MFA.Producer.IoC
 
         protected override void Load(ContainerBuilder builder)
         {
-            //builder.Register(c => new BlogQueries(connectionString, database))
-            //    .As<IBlogQueries>();
+            builder.Register(c => new SchoolQueries(connectionString, database))
+                .As<ISchoolQueries>();
 
-            //builder.Register(c => new PostQueries(connectionString, database))
-            //    .As<IPostQueries>();
+            builder.Register(c => new MongoContext(connectionString, database))
+                .As<MongoContext>().SingleInstance();
 
-            //builder.Register(c => new MongoContext(connectionString, database))
-            //    .As<MongoContext>().SingleInstance();
+            builder.RegisterType<BlogReadOnlyRepository>()
+                .As<IBlogReadOnlyRepository>()
+                .InstancePerLifetimeScope();
 
-            //builder.RegisterType<BlogReadOnlyRepository>()
-            //    .As<IBlogReadOnlyRepository>()
-            //    .InstancePerLifetimeScope();
-
-            //builder.RegisterType<PostReadOnlyRepository>()
-            //    .As<IPostReadOnlyRepository>()
-            //    .InstancePerLifetimeScope();
+            builder.RegisterType<PostReadOnlyRepository>()
+                .As<IPostReadOnlyRepository>()
+                .InstancePerLifetimeScope();
         }
     }
 }
