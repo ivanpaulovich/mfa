@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MFA.Domain.Model;
+using System;
 using System.Collections.Generic;
 using System.Text;
 

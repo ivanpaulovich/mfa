@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MFA.Domain.Model.Teachers.Events
+namespace MFA.Domain.Model.Schools.Events
 {
     public class ChildCheckdOutDomainEvent : DomainEvent
     {

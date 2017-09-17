@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MFA.Domain.Model.Parents.Events
+namespace MFA.Domain.Model.Schools.Events
 {
     public class ChildPickedDomainEvent : DomainEvent
     {

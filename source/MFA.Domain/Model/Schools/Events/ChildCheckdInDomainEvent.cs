@@ -1,25 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace MFA.Domain.Model.Parents.Events
+namespace MFA.Domain.Model.Teachers.Schools
 {
-    public class ChildLeftInDomainEvent : DomainEvent
+    public class ChildCheckdInDomainEvent : DomainEvent
     {
         public Guid ChildId { get; private set; }
 
-        public ChildLeftInDomainEvent(Guid aggregateRootId, int version,
+        public ChildCheckdInDomainEvent(Guid aggregateRootId, int version,
             DateTime createdDate, Header header, Guid childId)
             : base(aggregateRootId, version, createdDate, header)
         {
             ChildId = childId;
         }
 
-        public static ChildLeftInDomainEvent Create(AggregateRoot aggregateRoot,
+        public static ChildCheckdInDomainEvent Create(AggregateRoot aggregateRoot,
             Guid childId)
         {
             if (aggregateRoot == null)
                 throw new ArgumentNullException("aggregateRoot");
 
-            ChildLeftInDomainEvent domainEvent = new ChildLeftInDomainEvent(
+            ChildCheckdInDomainEvent domainEvent = new ChildCheckdInDomainEvent(
                 aggregateRoot.Id, aggregateRoot.Version, DateTime.UtcNow, null, childId);
 
             return domainEvent;

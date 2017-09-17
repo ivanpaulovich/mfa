@@ -3,20 +3,20 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MFA.Domain.Model.Teachers
+namespace MFA.Domain.Model.Schools
 {
-    public class Teacher : AggregateRoot
+    public class Parent : Entity
     {
         private Name name;
 
-        public void CheckInChild()
+        private Parent()
         {
 
         }
 
-        public void CheckOutChild()
+        public static Parent Create()
         {
-
+            return new Parent();
         }
     }
 }

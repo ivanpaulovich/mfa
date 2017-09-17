@@ -1,26 +1,26 @@
 ﻿using MediatR;
 using MFA.Domain.Model.Schools;
-using MFA.Producer.Application.Commands.Parents;
+using MFA.Producer.Application.Commands.Teachers;
 using MFA.ServiceBus;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MFA.Producer.Application.CommandHandlers.Parents
+namespace MFA.Producer.Application.CommandHandlers.Teachers
 {
-    public class LeaveChildInCommandHandler : IAsyncRequestHandler<LeaveChildInCommand, Guid>
+    public class CheckOutChildCommandHandler : IAsyncRequestHandler<CheckOutChildCommand, Guid>
     {
         private readonly IPublisher bus;
         private readonly ISchoolReadOnlyRepository schoolRepository;
 
-        public LeaveChildInCommandHandler(IPublisher bus, ISchoolReadOnlyRepository schoolRepository)
+        public CheckOutChildCommandHandler(IPublisher bus, ISchoolReadOnlyRepository schoolRepository)
         {
             this.bus = bus ?? throw new ArgumentNullException(nameof(bus));
             this.schoolRepository = schoolRepository ?? throw new ArgumentNullException(nameof(schoolRepository));
         }
 
-        public async Task<Guid> Handle(LeaveChildInCommand command)
+        public async Task<Guid> Handle(CheckOutChildCommand command)
         {
             School school = await schoolRepository.GetSchool(command.SchoolId);
             school.LeaveChild(command.ChildId);

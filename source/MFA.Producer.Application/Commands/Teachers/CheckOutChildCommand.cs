@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace MFA.Producer.Application.Commands.Parents
+namespace MFA.Producer.Application.Commands.Teachers
 {
     [DataContract]
-    public class LeaveChildInCommand : CommandBase, IRequest<Guid>
+    public class CheckOutChildCommand : CommandBase, IRequest<Guid>
     {
         [DataMember]
         public Guid SchoolId { get; private set; }
@@ -15,12 +15,12 @@ namespace MFA.Producer.Application.Commands.Parents
         [DataMember]
         public Guid ChildId { get; private set; }
 
-        public LeaveChildInCommand()
+        public CheckOutChildCommand()
         {
 
         }
 
-        public LeaveChildInCommand(Guid childId) : this()
+        public CheckOutChildCommand(Guid childId) : this()
         {
             ChildId = childId;
         }
