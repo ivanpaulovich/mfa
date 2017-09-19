@@ -2,9 +2,6 @@
 using MFA.Domain.Model.Schools;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MFA.Infrastructure
 {
@@ -41,6 +38,14 @@ namespace MFA.Infrastructure
             }
         }
 
+        public IMongoCollection<School> Schools
+        {
+            get
+            {
+                return database.GetCollection<School>("Schools");
+            }
+        }
+
         private void Map()
         {
             BsonClassMap.RegisterClassMap<Entity>(cm =>
@@ -53,20 +58,20 @@ namespace MFA.Infrastructure
                 cm.MapProperty(c => c.Version).SetElementName("_version");
             });
 
+            BsonClassMap.RegisterClassMap<School>(cm =>
+            {
+                cm.MapField("name").SetElementName("name");
+            });
+
             BsonClassMap.RegisterClassMap<Parent>(cm =>
             {
-                cm.MapField("url").SetElementName("url");
-                cm.MapField("rating").SetElementName("rating");
-                cm.MapField("enabled").SetElementName("enabled");
+                cm.MapField("name").SetElementName("name");
             });
 
             BsonClassMap.RegisterClassMap<Child>(cm =>
             {
-                cm.MapField("title").SetElementName("title");
-                cm.MapField("content").SetElementName("content");
-                cm.MapField("blogId").SetElementName("blogId");
-                cm.MapField("enabled").SetElementName("enabled");
-                cm.MapField("published").SetElementName("published");
-            });        }
+                cm.MapField("name").SetElementName("name");
+            });
+        }
     }
 }

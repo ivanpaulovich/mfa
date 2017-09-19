@@ -1,4 +1,5 @@
 ﻿using MFA.Domain.Model.Schools;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MFA.Infrastructure.Repositories.Schools
 {
-    class SchoolReadOnlyRepository : ISchoolReadOnlyRepository
+    public class SchoolReadOnlyRepository : ISchoolReadOnlyRepository
     {
         private readonly MongoContext _mongoContext;
 

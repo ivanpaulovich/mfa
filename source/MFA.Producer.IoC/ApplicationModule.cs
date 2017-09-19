@@ -1,8 +1,8 @@
 ﻿using Autofac;
+using MFA.Domain.Model.Schools;
+using MFA.Infrastructure;
+using MFA.Infrastructure.Repositories.Schools;
 using MFA.Producer.Application.Queries;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MFA.Producer.IoC
 {
@@ -25,12 +25,8 @@ namespace MFA.Producer.IoC
             builder.Register(c => new MongoContext(connectionString, database))
                 .As<MongoContext>().SingleInstance();
 
-            builder.RegisterType<BlogReadOnlyRepository>()
-                .As<IBlogReadOnlyRepository>()
-                .InstancePerLifetimeScope();
-
-            builder.RegisterType<PostReadOnlyRepository>()
-                .As<IPostReadOnlyRepository>()
+            builder.RegisterType<SchoolReadOnlyRepository>()
+                .As<ISchoolReadOnlyRepository>()
                 .InstancePerLifetimeScope();
         }
     }
