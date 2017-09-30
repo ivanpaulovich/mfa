@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using MFA.ServiceBus;
+using MFA.ServiceBus.Kafka;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,8 +20,8 @@ namespace MFA.Producer.IoC
 
         protected override void Load(ContainerBuilder builder)
         {
-            //builder.Register(c => new Config(connectionString, topic)).As<Config>().SingleInstance();
-            //builder.RegisterType<Bus>().As<IPublisher>().SingleInstance();
+            builder.Register(c => new Config(connectionString, topic)).As<Config>().SingleInstance();
+            builder.RegisterType<Bus>().As<IPublisher>().SingleInstance();
         }
     }
 }

@@ -109,10 +109,7 @@ namespace MFA.Producer.WebAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            if (env.IsProduction())
-            {
-                app.UseAuthentication();
-            }
+            app.UseAuthentication();
 
             app.UseMvc();
 
