@@ -4,23 +4,20 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace Jambo.Producer.Application.Commands.Teachers
+namespace Jambo.Producer.Application.Commands.Children
 {
     [DataContract]
-    public class CheckInChildCommand : CommandBase, IRequest<Guid>
+    public class PickChildCommand : CommandBase, IRequest<Guid>
     {
-        [DataMember]
-        public Guid SchoolId { get; private set; }
-
         [DataMember]
         public Guid ChildId { get; private set; }
 
-        public CheckInChildCommand()
+        public PickChildCommand()
         {
 
         }
 
-        public CheckInChildCommand(Guid childId) : this()
+        public PickChildCommand(Guid childId) : this()
         {
             ChildId = childId;
         }

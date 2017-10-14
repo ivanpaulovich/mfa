@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Jambo.Domain.ServiceBus;
+using Jambo.Producer.Application.Commands.Children;
 
 namespace Jambo.Producer.Application.CommandHandlers.Teachers
 {
@@ -22,7 +23,7 @@ namespace Jambo.Producer.Application.CommandHandlers.Teachers
 
         public async Task<Guid> Handle(CheckInChildCommand command)
         {
-            School school = await schoolRepository.GetSchool(command.SchoolId);
+            School school = await schoolRepository.GetSchoolByChildId(command.ChildId);
             school.LeaveChild(command.ChildId);
 
             await bus.Publish(school.GetEvents(), command.Header);

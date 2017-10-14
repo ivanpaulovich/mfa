@@ -25,5 +25,10 @@ namespace Jambo.Producer.Infrastructure.DataAccess.Repositories.Schools
         {
             return await _mongoContext.Schools.Find(e => e.Id == id).SingleAsync();
         }
+
+        public Task<School> GetSchoolByChildId(Guid childId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

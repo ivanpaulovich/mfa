@@ -18,10 +18,10 @@ namespace Jambo.Producer.Infrastructure.Queries
             }
         }
 
-        public SchoolQueries(string connectionString, string database)
+        public SchoolQueries(string connectionString, string databaseName)
         {
             MongoClient mongoClient = new MongoClient(connectionString);
-            this.database = mongoClient.GetDatabase(database);
+            this.database = mongoClient.GetDatabase(databaseName);
         }
 
         public async Task<IEnumerable<ExpandoObject>> GetSchoolsAsync()

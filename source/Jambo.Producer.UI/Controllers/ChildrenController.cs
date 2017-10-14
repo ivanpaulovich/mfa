@@ -1,4 +1,4 @@
-﻿using Jambo.Producer.Application.Commands.Parents;
+﻿using Jambo.Producer.Application.Commands.Children;
 using Jambo.Producer.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -10,40 +10,47 @@ namespace Jambo.Producer.UI.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
-    public class ParentsController : Controller
+    public class ChildrenController : Controller
     {
         private readonly IMediator mediator;
         private readonly ISchoolQueries queries;
 
-        public ParentsController(IMediator mediator, ISchoolQueries queries)
+        public ChildrenController(IMediator mediator, ISchoolQueries queries)
         {
             this.mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
             this.queries = queries ?? throw new ArgumentNullException(nameof(queries));
         }
 
+        [HttpPatch("CheckIn")]
+        public async Task<IActionResult> CheckIn([FromBody]CheckInChildCommand command)
+        {
+            await mediator.Send(command);
+            return (IActionResult)Ok();
+        }
+
+        [HttpPatch("CheckOut")]
+        public async Task<IActionResult> CheckOut([FromBody]CheckOutChildCommand command)
+        {
+            await mediator.Send(command);
+            return (IActionResult)Ok();
+        }
+
         [HttpPatch("Create")]
-        public async Task<IActionResult> Create([FromBody]CreateParentCommand command)
+        public async Task<IActionResult> Create([FromBody]CreateChildCommand command)
         {
             await mediator.Send(command);
             return (IActionResult)Ok();
         }
 
-        [HttpPatch("Disable")]
-        public async Task<IActionResult> Disable([FromBody]DisableParentCommand command)
+        [HttpPatch("LeaveIn")]
+        public async Task<IActionResult> Leave([FromBody]LeaveChildInCommand command)
         {
             await mediator.Send(command);
             return (IActionResult)Ok();
         }
 
-        [HttpPatch("Enable")]
-        public async Task<IActionResult> Enable([FromBody]EnableParentCommand command)
-        {
-            await mediator.Send(command);
-            return (IActionResult)Ok();
-        }
-
-        [HttpPatch("UpdatePersonalDetails")]
-        public async Task<IActionResult> Enable([FromBody]UpdateParentPersonalDetailsCommand command)
+        [HttpPatch("Pick")]
+        public async Task<IActionResult> Pick([FromBody]PickChildCommand command)
         {
             await mediator.Send(command);
             return (IActionResult)Ok();

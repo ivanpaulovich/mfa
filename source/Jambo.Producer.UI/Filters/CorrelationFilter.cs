@@ -29,9 +29,17 @@ namespace Jambo.Producer.UI.Filters
                 correlationId = Guid.NewGuid();
 
 
-            string userName = (context.HttpContext.User.Identity as ClaimsIdentity).Claims.Where(e => e.Type == ClaimTypes.NameIdentifier).FirstOrDefault().Value.ToString();
+            string userId = (context.HttpContext.User.Identity as ClaimsIdentity)
+                .Claims
+                .Where(e => e.Type == ClaimTypes.NameIdentifier)
+                .FirstOrDefault().Value.ToString();
 
-            command.Header = new Domain.Model.Header(correlationId, userName); 
+            string userName = (context.HttpContext.User.Identity as ClaimsIdentity)
+                .Claims
+                .Where(e => e.Type == ClaimTypes.Name)
+                .FirstOrDefault().Value.ToString();
+
+            command.Header = new Domain.Model.Header(correlationId, new Guid(userId), userName); 
         }
 
         public override void OnActionExecuted(ActionExecutedContext context)

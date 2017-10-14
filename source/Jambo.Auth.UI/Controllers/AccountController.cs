@@ -40,12 +40,12 @@ namespace Jambo.Auth.UI
             });
         }
 
-        private JwtSecurityToken GetJwtSecurityToken(string user)
+        private JwtSecurityToken GetJwtSecurityToken(Guid userId, string user)
         {
             return new JwtSecurityToken(
                 config.Issuer,
                 config.Issuer,
-                GetTokenClaims(user),
+                GetTokenClaims(userId, user),
                 expires: DateTime.UtcNow.AddDays(1),
                 signingCredentials: new SigningCredentials(
                     new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.SecretKey)),
@@ -53,11 +53,13 @@ namespace Jambo.Auth.UI
             );
         }
 
-        private static IEnumerable<Claim> GetTokenClaims(string user)
+        private static IEnumerable<Claim> GetTokenClaims(Guid userId, string user)
         {
             return new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
+                new Claim(ClaimTypes.Name, user),
+                new Claim(JwtRegisteredClaimNames.Jti, userId.ToString()),
                 new Claim(JwtRegisteredClaimNames.Sub, user)
             };
         }

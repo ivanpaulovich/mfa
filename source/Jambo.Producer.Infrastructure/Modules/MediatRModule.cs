@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Autofac.Features.Variance;
+using Jambo.Producer.Application.Commands.Children;
 using Jambo.Producer.Application.Commands.Parents;
 using MediatR;
 using System.Collections.Generic;
