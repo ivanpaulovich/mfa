@@ -7,17 +7,17 @@ using System.Text;
 namespace Jambo.Producer.Application.Commands.Children
 {
     [DataContract]
-    public class CheckInChildCommand : CommandBase, IRequest<Guid>
+    public class PickCommand : CommandBase, IRequest<Guid>
     {
         [DataMember]
         public Guid ChildId { get; private set; }
 
-        public CheckInChildCommand()
+        public PickCommand()
         {
 
         }
 
-        public CheckInChildCommand(Guid childId) : this()
+        public PickCommand(Guid childId) : this()
         {
             ChildId = childId;
         }

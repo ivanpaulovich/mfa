@@ -5,17 +5,17 @@ using System.Runtime.Serialization;
 namespace Jambo.Producer.Application.Commands.Schools
 {
     [DataContract]
-    public class EnableSchoolCommand : CommandBase, IRequest
+    public class DisableSchoolCommand : CommandBase, IRequest
     {
         [DataMember]
         public Guid SchoolId { get; private set; }
 
-        public EnableSchoolCommand()
+        public DisableSchoolCommand()
         {
 
         }
 
-        public EnableSchoolCommand(Guid schoolId) : this()
+        public DisableSchoolCommand(Guid schoolId) : this()
         {
             SchoolId = schoolId;
         }

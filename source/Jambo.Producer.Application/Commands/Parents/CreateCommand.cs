@@ -5,7 +5,7 @@ using System;
 namespace Jambo.Producer.Application.Commands.Parents
 {
     [DataContract]
-    public class CreateParentCommand : CommandBase, IRequest<Guid>
+    public class CreateCommand : CommandBase, IRequest<Guid>
     {
         [DataMember]
         public Guid SchoolId { get; private set; }
@@ -19,12 +19,12 @@ namespace Jambo.Producer.Application.Commands.Parents
         [DataMember]
         public DateTime BirthDate { get; private set; }
 
-        public CreateParentCommand()
+        public CreateCommand()
         {
 
         }
 
-        public CreateParentCommand(Guid schoolId, string identification, string name, DateTime birthDate) : this()
+        public CreateCommand(Guid schoolId, string identification, string name, DateTime birthDate) : this()
         {
             SchoolId = schoolId;
             Identification = identification;

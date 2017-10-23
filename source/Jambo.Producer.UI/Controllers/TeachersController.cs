@@ -24,25 +24,25 @@ namespace Jambo.Producer.UI.Controllers
             this.queries = queries ?? throw new ArgumentNullException(nameof(queries));
         }
 
-        [HttpPatch("Create")]
-        public async Task<IActionResult> Create([FromBody]CreateTeacherCommand command)
-        {
-            await mediator.Send(command);
-            return (IActionResult)Ok();
-        }
+        //[HttpPatch("Create")]
+        //public async Task<IActionResult> Create([FromBody] Application.Commands.Teachers.CreateCommand command)
+        //{
+        //    await mediator.Send(command);
+        //    return (IActionResult)Ok();
+        //}
 
-        [HttpPatch("Disable")]
-        public async Task<IActionResult> Disable([FromBody]DisableTeacherCommand command)
-        {
-            await mediator.Send(command);
-            return (IActionResult)Ok();
-        }
+        //[HttpPatch("Disable")]
+        //public async Task<IActionResult> Disable([FromBody]DisableTeacherCommand command)
+        //{
+        //    await mediator.Send(command);
+        //    return (IActionResult)Ok();
+        //}
 
-        [HttpPatch("Enable")]
-        public async Task<IActionResult> Enable([FromBody]EnableTeacherCommand command)
-        {
-            await mediator.Send(command);
-            return (IActionResult)Ok();
-        }
+        //[HttpPatch("Enable")]
+        //public async Task<IActionResult> Enable([FromBody] Application.Commands.Teachers.EnableCommand command)
+        //{
+        //    await mediator.Send(command);
+        //    return (IActionResult)Ok();
+        //}
     }
 }

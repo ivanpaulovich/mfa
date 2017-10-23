@@ -6,17 +6,17 @@ using System;
 namespace Jambo.Producer.Application.Commands.Schools
 {
     [DataContract]
-    public class CreateSchoolCommand : CommandBase, IRequest<Guid>
+    public class CreateCommand : CommandBase, IRequest<Guid>
     {
         [DataMember]
         public string Title { get; private set; }
 
-        public CreateSchoolCommand()
+        public CreateCommand()
         {
 
         }
 
-        public CreateSchoolCommand(string title) : this()
+        public CreateCommand(string title) : this()
         {
             Title = title;
         }

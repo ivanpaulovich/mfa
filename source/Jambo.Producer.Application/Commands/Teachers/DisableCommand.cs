@@ -1,21 +1,21 @@
 ﻿using MediatR;
-using System.Runtime.Serialization;
 using System;
+using System.Runtime.Serialization;
 
 namespace Jambo.Producer.Application.Commands.Teachers
 {
     [DataContract]
-    public class EnableTeacherCommand : CommandBase, IRequest
+    public class DisableTeacherCommand : CommandBase, IRequest
     {
         [DataMember]
         public Guid TeacherId { get; private set; }
 
-        public EnableTeacherCommand()
+        public DisableTeacherCommand()
         {
 
         }
 
-        public EnableTeacherCommand(Guid teacherId) : this()
+        public DisableTeacherCommand(Guid teacherId) : this()
         {
             TeacherId = teacherId;
         }

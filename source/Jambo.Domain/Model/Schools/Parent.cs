@@ -1,13 +1,13 @@
 ﻿using Jambo.Domain.Model.ValueTypes;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System;
 
 namespace Jambo.Domain.Model.Schools
 {
     public class Parent : Entity
     {
         private Name name;
+        private List<Child> children;
 
         private Parent()
         {
@@ -17,6 +17,11 @@ namespace Jambo.Domain.Model.Schools
         public static Parent Create()
         {
             return new Parent();
+        }
+
+        public static Parent Create(Name name, Identification identification, BirthDate birthDate)
+        {
+            throw new NotImplementedException();
         }
     }
 }

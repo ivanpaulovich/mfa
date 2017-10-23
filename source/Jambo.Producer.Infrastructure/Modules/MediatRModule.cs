@@ -33,7 +33,7 @@ namespace Jambo.Producer.Infrastructure.Modules
                 })
                 .InstancePerLifetimeScope();
 
-            builder.RegisterAssemblyTypes(typeof(LeaveChildInCommand).GetTypeInfo().Assembly).AsImplementedInterfaces(); // via assembly scan
+            builder.RegisterAssemblyTypes(typeof(LeaveInCommand).GetTypeInfo().Assembly).AsImplementedInterfaces(); // via assembly scan
         }
     }
 }

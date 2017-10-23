@@ -22,35 +22,35 @@ namespace Jambo.Producer.UI.Controllers
         }
 
         [HttpPatch("CheckIn")]
-        public async Task<IActionResult> CheckIn([FromBody]CheckInChildCommand command)
+        public async Task<IActionResult> CheckIn([FromBody]CheckInCommand command)
         {
             await mediator.Send(command);
             return (IActionResult)Ok();
         }
 
         [HttpPatch("CheckOut")]
-        public async Task<IActionResult> CheckOut([FromBody]CheckOutChildCommand command)
+        public async Task<IActionResult> CheckOut([FromBody]CheckOutCommand command)
         {
             await mediator.Send(command);
             return (IActionResult)Ok();
         }
 
-        [HttpPatch("Create")]
-        public async Task<IActionResult> Create([FromBody]CreateChildCommand command)
-        {
-            await mediator.Send(command);
-            return (IActionResult)Ok();
-        }
+        //[HttpPatch("Create")]
+        //public async Task<IActionResult> Create([FromBody]CreateCommand command)
+        //{
+        //    await mediator.Send(command);
+        //    return (IActionResult)Ok();
+        //}
 
         [HttpPatch("LeaveIn")]
-        public async Task<IActionResult> Leave([FromBody]LeaveChildInCommand command)
+        public async Task<IActionResult> Leave([FromBody]LeaveInCommand command)
         {
             await mediator.Send(command);
             return (IActionResult)Ok();
         }
 
         [HttpPatch("Pick")]
-        public async Task<IActionResult> Pick([FromBody]PickChildCommand command)
+        public async Task<IActionResult> Pick([FromBody]PickCommand command)
         {
             await mediator.Send(command);
             return (IActionResult)Ok();

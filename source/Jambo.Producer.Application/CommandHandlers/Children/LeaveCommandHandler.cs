@@ -8,22 +8,23 @@ using System.Threading.Tasks;
 using Jambo.Domain.ServiceBus;
 using Jambo.Producer.Application.Commands.Children;
 
-namespace Jambo.Producer.Application.CommandHandlers.Parents
+namespace Jambo.Producer.Application.CommandHandlers.Children
 {
-    public class LeaveChildInCommandHandler : IAsyncRequestHandler<LeaveChildInCommand, Guid>
+    public class LeaveCommandHandler : IAsyncRequestHandler<LeaveInCommand, Guid>
     {
         private readonly IPublisher bus;
         private readonly ISchoolReadOnlyRepository schoolRepository;
 
-        public LeaveChildInCommandHandler(IPublisher bus, ISchoolReadOnlyRepository schoolRepository)
+        public LeaveCommandHandler(IPublisher bus, ISchoolReadOnlyRepository schoolRepository)
         {
             this.bus = bus ?? throw new ArgumentNullException(nameof(bus));
             this.schoolRepository = schoolRepository ?? throw new ArgumentNullException(nameof(schoolRepository));
         }
 
-        public async Task<Guid> Handle(LeaveChildInCommand command)
+        public async Task<Guid> Handle(LeaveInCommand command)
         {
-            School school = await schoolRepository.GetSchoolByChildId(command.ChildId);
+            School school = await schoolRepository.GetSchoolByTeacherId(command.Header.UserId);
+            Child child = await schoolRepository.GetChildById(command.ChildId);
             school.LeaveChild(command.ChildId);
 
             await bus.Publish(school.GetEvents(), command.Header);

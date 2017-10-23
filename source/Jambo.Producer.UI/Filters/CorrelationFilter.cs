@@ -1,11 +1,8 @@
 ﻿using Jambo.Producer.Application.Commands;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace Jambo.Producer.UI.Filters
 {
@@ -28,18 +25,26 @@ namespace Jambo.Producer.UI.Filters
             else
                 correlationId = Guid.NewGuid();
 
+            ClaimsIdentity identity = context.HttpContext.User.Identity as ClaimsIdentity;
 
-            string userId = (context.HttpContext.User.Identity as ClaimsIdentity)
-                .Claims
-                .Where(e => e.Type == ClaimTypes.NameIdentifier)
-                .FirstOrDefault().Value.ToString();
+            if (identity.IsAuthenticated)
+            {
+                string userId = identity
+                    .Claims
+                    .Where(e => e.Type == ClaimTypes.NameIdentifier)
+                    .FirstOrDefault().Value.ToString();
 
-            string userName = (context.HttpContext.User.Identity as ClaimsIdentity)
-                .Claims
-                .Where(e => e.Type == ClaimTypes.Name)
-                .FirstOrDefault().Value.ToString();
+                string userName = identity
+                    .Claims
+                    .Where(e => e.Type == ClaimTypes.Name)
+                    .FirstOrDefault().Value.ToString();
 
-            command.Header = new Domain.Model.Header(correlationId, new Guid(userId), userName); 
+                command.Header = new Domain.Model.Header(correlationId, new Guid(userId), userName);
+            }
+            else
+            {
+                command.Header = new Domain.Model.Header(correlationId);
+            }
         }
 
         public override void OnActionExecuted(ActionExecutedContext context)

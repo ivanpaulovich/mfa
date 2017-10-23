@@ -8,6 +8,7 @@ namespace Jambo.Domain.Model.Schools
     public class Child : Entity
     {
         private Name name;
+        private BirthDate birthDate;
 
         private Child()
         {
@@ -17,6 +18,11 @@ namespace Jambo.Domain.Model.Schools
         public static Child Create()
         {
             return new Child();
+        }
+
+        public static Child Create(Name name, BirthDate birthDate)
+        {
+            throw new NotImplementedException();
         }
     }
 }

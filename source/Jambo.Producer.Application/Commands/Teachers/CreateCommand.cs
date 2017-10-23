@@ -5,7 +5,7 @@ using System;
 namespace Jambo.Producer.Application.Commands.Teachers
 {
     [DataContract]
-    public class CreateTeacherCommand : CommandBase, IRequest<Guid>
+    public class CreateCommand : CommandBase, IRequest<Guid>
     {
         [DataMember]
         public Guid SchoolId { get; private set; }
@@ -13,12 +13,12 @@ namespace Jambo.Producer.Application.Commands.Teachers
         [DataMember]
         public string Name { get; private set; }
 
-        public CreateTeacherCommand()
+        public CreateCommand()
         {
 
         }
 
-        public CreateTeacherCommand(Guid schoolId, string name) : this()
+        public CreateCommand(Guid schoolId, string name) : this()
         {
             SchoolId = schoolId;
             Name = name;

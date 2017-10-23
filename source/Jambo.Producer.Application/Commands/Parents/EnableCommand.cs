@@ -1,22 +1,21 @@
 ﻿using MediatR;
-using System.Runtime.Serialization;
-using Jambo.Producer.Application.Commands;
 using System;
+using System.Runtime.Serialization;
 
 namespace Jambo.Producer.Application.Commands.Parents
 {
     [DataContract]
-    public class EnableParentCommand : CommandBase, IRequest
+    public class EnableCommand : CommandBase, IRequest
     {
         [DataMember]
         public Guid ParentId { get; private set; }
 
-        public EnableParentCommand()
+        public EnableCommand()
         {
 
         }
 
-        public EnableParentCommand(Guid parentId) : this()
+        public EnableCommand(Guid parentId) : this()
         {
             ParentId = parentId;
         }

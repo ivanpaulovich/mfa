@@ -6,6 +6,7 @@ using System;
 using System.Threading.Tasks;
 using Jambo.Producer.Application.Queries;
 using Jambo.Producer.Application.Commands.Schools;
+using Jambo.Domain.Model.Schools;
 
 namespace Jambo.Producer.UI.Controllers
 {
@@ -22,32 +23,55 @@ namespace Jambo.Producer.UI.Controllers
             this.queries = queries ?? throw new ArgumentNullException(nameof(queries));
         }
 
-        [HttpPatch("Create")]
-        public async Task<IActionResult> Create([FromBody]CreateSchoolCommand command)
+        [AllowAnonymous]
+        [HttpPatch("Signup")]
+        public async Task<IActionResult> Signup([FromBody] Application.Commands.Schools.SignupCommand command)
         {
-            await mediator.Send(command);
-            return (IActionResult)Ok();
+            School createdSchool = await mediator.Send<School>(command);
+
+            var result = new
+            {
+                ManagerId = createdSchool.GetManager().Id.ToString(),
+                ManagerName = createdSchool.GetManager().GetName().ToString()
+            };
+
+            return CreatedAtRoute("GetSchoool", new { id = createdSchool.Id }, result);
         }
 
-        [HttpPatch("Disable")]
-        public async Task<IActionResult> Disable([FromBody]DisableSchoolCommand command)
+        [HttpGet("{id}", Name = "GetSchoool")]
+        public async Task<IActionResult> Get(Guid id)
         {
-            await mediator.Send(command);
-            return (IActionResult)Ok();
+            var school = await queries.GetSchoolAsync(id);
+
+            return Ok(school);
         }
 
-        [HttpPatch("Enable")]
-        public async Task<IActionResult> Enable([FromBody]EnableSchoolCommand command)
-        {
-            await mediator.Send(command);
-            return (IActionResult)Ok();
-        }
+        //[HttpPatch("Create")]
+        //public async Task<IActionResult> Create([FromBody] Application.Commands.Schools.CreateCommand command)
+        //{
+        //    await mediator.Send(command);
+        //    return (IActionResult)Ok();
+        //}
 
-        [HttpPatch("UpdateDetails")]
-        public async Task<IActionResult> UpdateDetails([FromBody]UpdateSchoolDetailsCommand command)
-        {
-            await mediator.Send(command);
-            return (IActionResult)Ok();
-        }
+        //[HttpPatch("Disable")]
+        //public async Task<IActionResult> Disable([FromBody]DisableSchoolCommand command)
+        //{
+        //    await mediator.Send(command);
+        //    return (IActionResult)Ok();
+        //}
+
+        //[HttpPatch("Enable")]
+        //public async Task<IActionResult> Enable([FromBody] Application.Commands.Schools.EnableCommand command)
+        //{
+        //    await mediator.Send(command);
+        //    return (IActionResult)Ok();
+        //}
+
+        //[HttpPatch("UpdateDetails")]
+        //public async Task<IActionResult> UpdateDetails([FromBody]UpdateSchoolDetailsCommand command)
+        //{
+        //    await mediator.Send(command);
+        //    return (IActionResult)Ok();
+        //}
     }
 }

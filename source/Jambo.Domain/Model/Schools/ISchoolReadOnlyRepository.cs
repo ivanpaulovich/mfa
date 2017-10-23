@@ -10,5 +10,9 @@ namespace Jambo.Domain.Model.Schools
         Task<IEnumerable<School>> GetAllSchools();
         Task<School> GetSchool(Guid id);
         Task<School> GetSchoolByChildId(Guid childId);
+        Task<Parent> GetParentById(Guid userId);
+        Task<Child> GetChildById(Guid childId);
+        Task<School> GetSchoolByTeacherId(Guid userId);
+        Task<Teacher> GetTeacherById(Guid userId);
     }
 }
