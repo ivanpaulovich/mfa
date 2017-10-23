@@ -31,6 +31,8 @@ namespace Jambo.Producer.UI.Controllers
 
             var result = new
             {
+                SchoolId = createdSchool.Id,
+                SchoolName = createdSchool.GetName().Text,
                 ManagerId = createdSchool.GetManager().Id.ToString(),
                 ManagerName = createdSchool.GetManager().GetName().ToString()
             };

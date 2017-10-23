@@ -1,6 +1,5 @@
 ﻿using Jambo.Domain.Model;
-using Jambo.Domain.Model.Blogs;
-using Jambo.Domain.Model.Posts;
+using Jambo.Domain.Model.Schools;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 
@@ -23,19 +22,27 @@ namespace Jambo.Consumer.Infrastructure.DataAccess
            mongoClient.DropDatabase(databaseName);
         }
 
-        public IMongoCollection<Blog> Blogs
+        public IMongoCollection<Parent> Parents
         {
             get
             {
-                return database.GetCollection<Blog>("Blogs");
+                return database.GetCollection<Parent>("Parents");
             }
         }
 
-        public IMongoCollection<Post> Posts
+        public IMongoCollection<Child> Children
         {
             get
             {
-                return database.GetCollection<Post>("Posts");
+                return database.GetCollection<Child>("Children");
+            }
+        }
+
+        public IMongoCollection<School> Schools
+        {
+            get
+            {
+                return database.GetCollection<School>("Schools");
             }
         }
 
@@ -51,25 +58,25 @@ namespace Jambo.Consumer.Infrastructure.DataAccess
                 cm.MapProperty(c => c.Version).SetElementName("_version");
             });
 
-            BsonClassMap.RegisterClassMap<Blog>(cm =>
+            BsonClassMap.RegisterClassMap<School>(cm =>
             {
-                cm.MapField("url").SetElementName("url");
-                cm.MapField("rating").SetElementName("rating");
-                cm.MapField("enabled").SetElementName("enabled");
+                cm.MapField("name").SetElementName("name");
+                cm.MapField("manager").SetElementName("manager");
             });
 
-            BsonClassMap.RegisterClassMap<Post>(cm =>
+            BsonClassMap.RegisterClassMap<Teacher>(cm =>
             {
-                cm.MapField("title").SetElementName("title");
-                cm.MapField("content").SetElementName("content");
-                cm.MapField("blogId").SetElementName("blogId");
-                cm.MapField("enabled").SetElementName("enabled");
-                cm.MapField("published").SetElementName("published");
+                cm.MapField("name").SetElementName("name");
             });
 
-            BsonClassMap.RegisterClassMap<Comment>(cm =>
+            BsonClassMap.RegisterClassMap<Parent>(cm =>
             {
-                cm.MapField("message").SetElementName("message");
+                cm.MapField("name").SetElementName("name");
+            });
+
+            BsonClassMap.RegisterClassMap<Child>(cm =>
+            {
+                cm.MapField("name").SetElementName("name");
             });
         }
     }

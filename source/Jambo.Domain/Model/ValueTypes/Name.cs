@@ -6,7 +6,15 @@ namespace Jambo.Domain.Model.ValueTypes
     {
         private string text;
 
-        private Name(string text)
+        public string Text
+        {
+            get
+            {
+                return text;
+            }
+        }
+
+        public Name(string text)
         {
             if (string.IsNullOrWhiteSpace(text))
                 throw new DomainException("The content field is required");

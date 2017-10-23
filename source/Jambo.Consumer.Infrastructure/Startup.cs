@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using Jambo.Consumer.Application.DomainEventHandlers.Blogs;
+using Jambo.Consumer.Application.DomainEventHandlers.Schools;
 using Jambo.Consumer.Infrastructure.Modules;
 using Jambo.Domain.ServiceBus;
 using MediatR;
@@ -25,7 +25,7 @@ namespace Jambo.Consumer.Infrastructure
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMediatR(typeof(BlogCreatedEventHandler).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(SchoolCreatedDomainEventDomainEventHandler).GetTypeInfo().Assembly);
 
             ContainerBuilder container = new ContainerBuilder();
             container.Populate(services);

@@ -7,7 +7,7 @@ namespace Jambo.Domain.Model.ValueTypes
     {
         private DateTime birthDate;
 
-        private BirthDate(DateTime birthDate)
+        public BirthDate(DateTime birthDate)
         {
             DateTime now = DateTime.Today;
             double years = (now - birthDate).Days / 365.25;

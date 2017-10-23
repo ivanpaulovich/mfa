@@ -1,11 +1,7 @@
 ﻿using Autofac;
-using Jambo.Domain.Model.Blogs;
-using Jambo.Domain.Model.Posts;
-using Jambo.Consumer.Infrastructure;
-using Jambo.Consumer.Infrastructure.DataAccess.Repositories;
-using Jambo.Consumer.Infrastructure.DataAccess.Repositories.Blogs;
-using Jambo.Consumer.Infrastructure.DataAccess.Repositories.Posts;
 using Jambo.Consumer.Infrastructure.DataAccess;
+using Jambo.Consumer.Infrastructure.DataAccess.Repositories.Schools;
+using Jambo.Domain.Model.Schools;
 
 namespace Jambo.Consumer.Infrastructure.Modules
 {
@@ -28,20 +24,12 @@ namespace Jambo.Consumer.Infrastructure.Modules
             builder.Register(c => mongoContext)
                 .As<MongoContext>().SingleInstance();
 
-            builder.RegisterType<BlogReadOnlyRepository>()
-                .As<IBlogReadOnlyRepository>()
+            builder.RegisterType<SchoolReadOnlyRepository>()
+                .As<ISchoolReadOnlyRepository>()
                 .InstancePerLifetimeScope();
 
-            builder.RegisterType<BlogWriteOnlyRepository>()
-                .As<IBlogWriteOnlyRepository>()
-                .InstancePerLifetimeScope();
-
-            builder.RegisterType<PostReadOnlyRepository>()
-                .As<IPostReadOnlyRepository>()
-                .InstancePerLifetimeScope();
-
-            builder.RegisterType<PostWriteOnlyRepository>()
-                .As<IPostWriteOnlyRepository>()
+            builder.RegisterType<SchoolWriteOnlyRepository>()
+                .As<ISchoolWriteOnlyRepository>()
                 .InstancePerLifetimeScope();
         }
     }

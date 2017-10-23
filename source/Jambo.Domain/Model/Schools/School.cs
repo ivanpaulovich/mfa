@@ -27,6 +27,12 @@ namespace Jambo.Domain.Model.Schools
             Register<SchoolCreatedDomainEvent>(When);
         }
 
+        public static School Create()
+        {
+            School school = new School();
+            return school;
+        }
+
         public static School Create(Name name)
         {
             School school = new School();
@@ -44,7 +50,7 @@ namespace Jambo.Domain.Model.Schools
         private void When(SchoolCreatedDomainEvent domainEvent)
         {
             Id = domainEvent.AggregateRootId;
-            name = domainEvent.ManagerName;
+            name = domainEvent.SchoolName;
             manager = Teacher.Create(domainEvent.ManagerId, domainEvent.ManagerName);
         }
 

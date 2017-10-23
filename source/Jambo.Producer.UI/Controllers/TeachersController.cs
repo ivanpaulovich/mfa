@@ -24,12 +24,12 @@ namespace Jambo.Producer.UI.Controllers
             this.queries = queries ?? throw new ArgumentNullException(nameof(queries));
         }
 
-        //[HttpPatch("Create")]
-        //public async Task<IActionResult> Create([FromBody] Application.Commands.Teachers.CreateCommand command)
-        //{
-        //    await mediator.Send(command);
-        //    return (IActionResult)Ok();
-        //}
+        [HttpPatch("Add")]
+        public async Task<IActionResult> Create([FromBody] Application.Commands.Teachers.AddTeacherCommand command)
+        {
+            await mediator.Send(command);
+            return (IActionResult)Ok();
+        }
 
         //[HttpPatch("Disable")]
         //public async Task<IActionResult> Disable([FromBody]DisableTeacherCommand command)

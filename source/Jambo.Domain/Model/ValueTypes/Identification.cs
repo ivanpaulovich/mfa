@@ -6,7 +6,7 @@ namespace Jambo.Domain.Model.ValueTypes
     {
         private string text;
 
-        private Identification(string text)
+        public Identification(string text)
         {
             if (string.IsNullOrWhiteSpace(text))
                 throw new DomainException("The text field is required");
