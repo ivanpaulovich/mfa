@@ -8,7 +8,7 @@ namespace Jambo.Domain.Model
         private readonly Dictionary<Type, Action<object>> handlers = new Dictionary<Type, Action<object>>();
         private readonly List<DomainEvent> domainEvents = new List<DomainEvent>();
         
-        public int Version { get; private set; }
+        public int Version { get; protected set; }
 
         public AggregateRoot()
         {

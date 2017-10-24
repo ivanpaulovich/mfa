@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Jambo.Domain.Model
 {
@@ -10,7 +8,6 @@ namespace Jambo.Domain.Model
 
         public Entity()
         {
-            Id = Guid.NewGuid();
         }
     }
 }

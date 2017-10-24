@@ -61,6 +61,12 @@ namespace Jambo.Producer.Infrastructure.DataAccess
             BsonClassMap.RegisterClassMap<School>(cm =>
             {
                 cm.MapField("name").SetElementName("name");
+                cm.MapField("manager").SetElementName("manager");
+            });
+
+            BsonClassMap.RegisterClassMap<Teacher>(cm =>
+            {
+                cm.MapField("name").SetElementName("name");
             });
 
             BsonClassMap.RegisterClassMap<Parent>(cm =>

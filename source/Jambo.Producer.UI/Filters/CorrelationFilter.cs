@@ -1,6 +1,8 @@
-﻿using Jambo.Producer.Application.Commands;
+﻿using Jambo.Domain.Model;
+using Jambo.Producer.Application.Commands;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 
@@ -31,19 +33,19 @@ namespace Jambo.Producer.UI.Filters
             {
                 string userId = identity
                     .Claims
-                    .Where(e => e.Type == ClaimTypes.NameIdentifier)
+                    .Where(e => e.Type == JwtRegisteredClaimNames.Jti)
                     .FirstOrDefault().Value.ToString();
 
                 string userName = identity
                     .Claims
-                    .Where(e => e.Type == ClaimTypes.Name)
+                    .Where(e => e.Type == ClaimTypes.NameIdentifier)
                     .FirstOrDefault().Value.ToString();
 
-                command.Header = new Domain.Model.Header(correlationId, new Guid(userId), userName);
+                command.Header = Header.Create(correlationId, new Guid(userId), userName);
             }
             else
             {
-                command.Header = new Domain.Model.Header(correlationId);
+                command.Header = Header.Create(correlationId);
             }
         }
 
