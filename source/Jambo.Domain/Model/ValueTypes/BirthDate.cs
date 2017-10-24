@@ -5,12 +5,20 @@ namespace Jambo.Domain.Model.ValueTypes
 {
     public class BirthDate
     {
-        private DateTime birthDate;
+        private DateTime value;
 
-        public BirthDate(DateTime birthDate)
+        public DateTime Value
+        {
+            get
+            {
+                return value;
+            }
+        }
+
+        public BirthDate(DateTime value)
         {
             DateTime now = DateTime.Today;
-            double years = (now - birthDate).Days / 365.25;
+            double years = (now - value).Days / 365.25;
 
             if (years < 0)
                 throw new DomainException("The BirthDate should be greater than zero.");
@@ -18,7 +26,7 @@ namespace Jambo.Domain.Model.ValueTypes
             if (years > 70)
                 throw new DomainException("The BirthDate should be less than 70 years.");
 
-            this.birthDate = birthDate;
+            this.value = value;
         }
 
         public static BirthDate Create(DateTime birthDate)
@@ -28,7 +36,7 @@ namespace Jambo.Domain.Model.ValueTypes
 
         public override string ToString()
         {
-            return birthDate.ToString();
+            return value.ToString();
         }
     }
 }

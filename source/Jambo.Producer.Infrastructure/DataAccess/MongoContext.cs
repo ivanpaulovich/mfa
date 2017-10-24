@@ -62,6 +62,9 @@ namespace Jambo.Producer.Infrastructure.DataAccess
             {
                 cm.MapField("name").SetElementName("name");
                 cm.MapField("manager").SetElementName("manager");
+                cm.MapField("teachers").SetElementName("teachers");
+                cm.MapField("parents").SetElementName("parents");
+                cm.MapField("children").SetElementName("children");
             });
 
             BsonClassMap.RegisterClassMap<Teacher>(cm =>
@@ -72,6 +75,9 @@ namespace Jambo.Producer.Infrastructure.DataAccess
             BsonClassMap.RegisterClassMap<Parent>(cm =>
             {
                 cm.MapField("name").SetElementName("name");
+                cm.MapField("identification").SetElementName("identification");
+                cm.MapField("birthDate").SetElementName("birthDate");
+                cm.MapField("children").SetElementName("children");
             });
 
             BsonClassMap.RegisterClassMap<Child>(cm =>

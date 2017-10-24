@@ -1,4 +1,5 @@
-﻿using Jambo.Producer.Application.Commands.Children;
+﻿using Jambo.Domain.Model.Schools;
+using Jambo.Producer.Application.Commands.Children;
 using Jambo.Producer.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -35,12 +36,29 @@ namespace Jambo.Producer.UI.Controllers
             return (IActionResult)Ok();
         }
 
-        //[HttpPatch("Create")]
-        //public async Task<IActionResult> Create([FromBody]CreateCommand command)
-        //{
-        //    await mediator.Send(command);
-        //    return (IActionResult)Ok();
-        //}
+        [HttpPatch("Add")]
+        public async Task<IActionResult> Add([FromBody]AddChildCommand command)
+        {
+            Child child = await mediator.Send(command);
+
+            var result = new
+            {
+                ChildId = child.Id,
+                Name = child.GetName().Text,
+                BirthDate = child.GetBirthDate().Value
+            };
+
+            return CreatedAtRoute("GetParent", 
+                new { id = child.Id, schoolId = command.SchoolId }, 
+                result);
+        }
+
+        [HttpGet("{id}", Name = "GetChild")]
+        public async Task<IActionResult> Get(Guid schoolId, Guid id)
+        {
+            var child = await queries.GetChildAsync(schoolId, id);
+            return Ok(child);
+        }
 
         [HttpPatch("LeaveIn")]
         public async Task<IActionResult> Leave([FromBody]LeaveInCommand command)

@@ -6,6 +6,14 @@ namespace Jambo.Domain.Model.ValueTypes
     {
         private string text;
 
+        public string Text
+        {
+            get
+            {
+                return text;
+            }
+        }
+
         public Identification(string text)
         {
             if (string.IsNullOrWhiteSpace(text))

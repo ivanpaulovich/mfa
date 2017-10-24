@@ -11,6 +11,7 @@ namespace Jambo.Domain.Model.Schools
         private Teacher manager;
         private List<Parent> parents;
         private List<Teacher> teachers;
+        private List<Child> children;
 
         public Name GetName()
         {
@@ -25,6 +26,8 @@ namespace Jambo.Domain.Model.Schools
         private School()
         {
             Register<SchoolCreatedDomainEvent>(When);
+            Register<TeacherAddedDomainEvent>(When);
+            Register<ParentAddedDomainEvent>(When);
         }
 
         public static School Create()
@@ -86,12 +89,35 @@ namespace Jambo.Domain.Model.Schools
 
         public void AddTeacher(Teacher teacher)
         {
-            throw new NotImplementedException();
+            Raise(TeacherAddedDomainEvent.Create(this, teacher.Id, teacher.GetName()));
+        }
+
+        private void When(TeacherAddedDomainEvent domainEvent)
+        {
+            teachers = teachers ?? new List<Teacher>();
+            Teacher teacher = Teacher.Create(domainEvent.TeacherId, domainEvent.TeacherName);
+
+            teachers.Add(teacher);
         }
 
         public void AddParent(Parent parent)
         {
-            throw new NotImplementedException();
+            Raise(ParentAddedDomainEvent.Create(this, parent.Id, 
+                parent.GetName(), 
+                parent.GetIdentification(), 
+                parent.GetBirthDate()));
+        }
+
+        private void When(ParentAddedDomainEvent domainEvent)
+        {
+            parents = parents ?? new List<Parent>();
+            Parent parent = Parent.Create(
+                domainEvent.ParentId, 
+                domainEvent.Name,
+                domainEvent.Identification,
+                domainEvent.BirthDate);
+
+            parents.Add(parent);
         }
 
         public void Start()
@@ -106,7 +132,29 @@ namespace Jambo.Domain.Model.Schools
 
         public void AddChild(Parent parent, Child child)
         {
-            throw new NotImplementedException();
+            Raise(ChildAddedDomainEvent.Create(this,  
+                parent.Id,
+                child.Id,
+                child.GetName(),
+                child.GetBirthDate()));
+        }
+
+        private void When(ChildAddedDomainEvent domainEvent)
+        {
+            children = children ?? new List<Child>();
+
+            Child child = Child.Create(
+                domainEvent.ChildId,
+                domainEvent.Name,
+                domainEvent.BirthDate);
+
+            children.Add(child);
+
+            foreach (Parent parent in parents)
+            {
+                if (parent.Id == domainEvent.ParentId)
+                    parent.AddChild(child);
+            }
         }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using MediatR;
 using System.Runtime.Serialization;
 using System;
+using Jambo.Domain.Model.Schools;
 
 namespace Jambo.Producer.Application.Commands.Parents
 {
     [DataContract]
-    public class CreateCommand : CommandBase, IRequest<Guid>
+    public class AddParentCommand : CommandBase, IRequest<Parent>
     {
         [DataMember]
         public Guid SchoolId { get; private set; }
@@ -19,12 +20,12 @@ namespace Jambo.Producer.Application.Commands.Parents
         [DataMember]
         public DateTime BirthDate { get; private set; }
 
-        public CreateCommand()
+        public AddParentCommand()
         {
 
         }
 
-        public CreateCommand(Guid schoolId, string identification, string name, DateTime birthDate) : this()
+        public AddParentCommand(Guid schoolId, string identification, string name, DateTime birthDate) : this()
         {
             SchoolId = schoolId;
             Identification = identification;

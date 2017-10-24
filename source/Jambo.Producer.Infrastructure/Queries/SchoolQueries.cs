@@ -33,5 +33,20 @@ namespace Jambo.Producer.Infrastructure.Queries
         {
             return await Schools.Find(Builders<ExpandoObject>.Filter.Eq("_id", id)).SingleAsync();
         }
+
+        public Task<ExpandoObject> GetTeacherAsync(Guid schoolId, Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ExpandoObject> GetChildAsync(Guid schoolId, Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ExpandoObject> GetParentAsync(Guid schoolId, Guid id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
