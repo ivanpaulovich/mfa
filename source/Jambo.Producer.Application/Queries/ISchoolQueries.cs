@@ -7,10 +7,10 @@ namespace Jambo.Producer.Application.Queries
 {
     public interface ISchoolQueries
     {
-        Task<ExpandoObject> GetChildAsync(Guid schoolId, Guid id);
-        Task<ExpandoObject> GetParentAsync(Guid schoolId, Guid id);
-        Task<ExpandoObject> GetSchoolAsync(Guid id);
-        Task<ExpandoObject> GetTeacherAsync(Guid schoolId, Guid id);
-        Task<IEnumerable<ExpandoObject>> GetSchoolsAsync();
+        Task<string> GetChildAsync(Guid schoolId, Guid id);
+        Task<string> GetParentAsync(Guid schoolId, Guid id);
+        Task<string> GetSchoolAsync(Guid id);
+        Task<string> GetTeacherAsync(Guid schoolId, Guid id);
+        Task<string> GetSchoolsAsync();
     }
 }

@@ -41,13 +41,6 @@ namespace Jambo.Producer.UI.Filters
                     .Where(e => e.Type == ClaimTypes.NameIdentifier)
                     .FirstOrDefault().Value.ToString();
 
-                string groupSid = identity
-                    .Claims
-                    .Where(e => e.Type == ClaimTypes.GroupSid)
-                    .FirstOrDefault().Value.ToString();
-
-                context.ActionArguments["schoolId"] = groupSid;
-
                 command.Header = Header.Create(correlationId, new Guid(userId), userName);
             }
             else
