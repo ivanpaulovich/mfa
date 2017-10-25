@@ -12,8 +12,8 @@ namespace Jambo.Producer.Infrastructure.DataAccess
 
         public MongoContext(string connectionString, string databaseName)
         {
-            this.mongoClient = new MongoClient(connectionString);
-            this.database = mongoClient.GetDatabase(databaseName);
+            mongoClient = new MongoClient(connectionString);
+            database = mongoClient.GetDatabase(databaseName);
             Map();
         }
 
@@ -83,6 +83,8 @@ namespace Jambo.Producer.Infrastructure.DataAccess
             BsonClassMap.RegisterClassMap<Child>(cm =>
             {
                 cm.MapField("name").SetElementName("name");
+                cm.MapField("birthDate").SetElementName("birthDate");
+                cm.MapField("currentCustody").SetElementName("currentCustody");
             });
         }
     }

@@ -26,6 +26,11 @@ namespace Jambo.Domain.Model.Schools
             return birthDate;
         }
 
+        public IReadOnlyCollection<Child> GetChildren()
+        {
+            return children;
+        }
+
         private Parent()
         {
 

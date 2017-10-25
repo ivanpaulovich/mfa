@@ -83,6 +83,8 @@ namespace Jambo.Consumer.Infrastructure.DataAccess
             BsonClassMap.RegisterClassMap<Child>(cm =>
             {
                 cm.MapField("name").SetElementName("name");
+                cm.MapField("birthDate").SetElementName("birthDate");
+                cm.MapField("currentCustody").SetElementName("currentCustody");
             });
         }
     }

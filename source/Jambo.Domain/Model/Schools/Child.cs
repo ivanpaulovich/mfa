@@ -7,6 +7,7 @@ namespace Jambo.Domain.Model.Schools
     {
         private Name name;
         private BirthDate birthDate;
+        private Custody currentCustody;
 
         public Name GetName()
         {
@@ -18,26 +19,48 @@ namespace Jambo.Domain.Model.Schools
             return birthDate;
         }
 
+        public void Left()
+        {
+            currentCustody = Custody.Create(CustodyEnum.FamilyLeftChildAtSchool);
+        }
+
+        public void Pickup()
+        {
+            currentCustody = Custody.Create(CustodyEnum.FamilyPickeupChildAtSchool);
+        }
+
+        public void CheckIn()
+        {
+            currentCustody = Custody.Create(CustodyEnum.ChildConfirmedAtSchool);
+        }
+
+        public void CheckOut()
+        {
+            currentCustody = Custody.Create(CustodyEnum.TeacherCheckOutChildAtSchool);
+        }
+
         private Child()
         {
 
         }
 
-        public static Child Create(Name name, BirthDate birthDate)
+        public static Child Create(Name name, BirthDate birthDate, Custody currentCustody)
         {
             Child parent = new Child();
             parent.name = name;
             parent.birthDate = birthDate;
+            parent.currentCustody = currentCustody;
 
             return parent;
         }
 
-        public static Child Create(Guid id, Name name, BirthDate birthDate)
+        public static Child Create(Guid id, Name name, BirthDate birthDate, Custody currentCustody)
         {
             Child parent = new Child();
             parent.Id = id;
             parent.name = name;
             parent.birthDate = birthDate;
+            parent.currentCustody = currentCustody;
 
             return parent;
         }

@@ -1,4 +1,5 @@
-﻿using Jambo.Domain.Model.Schools;
+﻿using Jambo.Domain.Exceptions;
+using Jambo.Domain.Model.Schools;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -15,19 +16,35 @@ namespace Jambo.Consumer.Infrastructure.DataAccess.Repositories.Schools
             _mongoContext = mongoContext;
         }
 
-        public Task<IEnumerable<School>> GetAllSchools()
+        public async Task<IEnumerable<School>> GetAllSchools()
         {
-            throw new NotImplementedException();
+            return await _mongoContext.Schools.Find(e => true).ToListAsync();
         }
 
-        public Task<Child> GetChildById(Guid childId)
+        public async Task<Child> GetChild(Guid schoolId, Guid childId)
         {
-            throw new NotImplementedException();
+            School school = await _mongoContext.Schools.Find(e => e.Id == schoolId).SingleAsync();
+
+            foreach (var child in school.GetChildren())
+            {
+                if (child.Id == childId)
+                    return child;
+            }
+
+            throw new JamboException("Objeto não encontrado");
         }
 
-        public Task<Parent> GetParentById(Guid userId)
+        public async Task<Parent> GetParent(Guid schoolId, Guid parentId)
         {
-            throw new NotImplementedException();
+            School school = await _mongoContext.Schools.Find(e => e.Id == schoolId).SingleAsync();
+
+            foreach (var parent in school.GetParents())
+            {
+                if (parent.Id == parentId)
+                    return parent;
+            }
+
+            throw new JamboException("Objeto não encontrado");
         }
 
         public async Task<School> GetSchool(Guid id)
@@ -35,19 +52,17 @@ namespace Jambo.Consumer.Infrastructure.DataAccess.Repositories.Schools
             return await _mongoContext.Schools.Find(e => e.Id == id).SingleAsync();
         }
 
-        public Task<School> GetSchoolByChildId(Guid childId)
+        public async Task<Teacher> GetTeacher(Guid schoolId, Guid teacherId)
         {
-            throw new NotImplementedException();
-        }
+            School school = await _mongoContext.Schools.Find(e => e.Id == schoolId).SingleAsync();
 
-        public Task<School> GetSchoolByTeacherId(Guid userId)
-        {
-            throw new NotImplementedException();
-        }
+            foreach (var teacher in school.GetTeachers())
+            {
+                if (teacher.Id == teacherId)
+                    return teacher;
+            }
 
-        public Task<Teacher> GetTeacherById(Guid userId)
-        {
-            throw new NotImplementedException();
+            throw new JamboException("Objeto não encontrado");
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Jambo.Domain.Model.Schools.Events;
 using Jambo.Domain.Model.ValueTypes;
-using System;
 using System.Collections.Generic;
 
 namespace Jambo.Domain.Model.Schools
@@ -43,6 +42,11 @@ namespace Jambo.Domain.Model.Schools
             Register<SchoolCreatedDomainEvent>(When);
             Register<TeacherAddedDomainEvent>(When);
             Register<ParentAddedDomainEvent>(When);
+            Register<ChildAddedDomainEvent>(When);
+            Register<ChildCheckedInDomainEvent>(When);
+            Register<ChildCheckedOutDomainEvent>(When);
+            Register<ChildLeftDomainEvent>(When);
+            Register<ChildPickedUpDomainEvent>(When);
         }
 
         public static School Create()
@@ -74,22 +78,61 @@ namespace Jambo.Domain.Model.Schools
 
         public void Pick(Parent parent, Child child)
         {
-            throw new NotImplementedException();
+            Raise(ChildPickedUpDomainEvent.Create(
+                this, child.Id));
+        }
+
+        private void When(ChildPickedUpDomainEvent domainEvent)
+        {
+            foreach (Child child in children)
+            {
+                if (child.Id == domainEvent.ChildId)
+                    child.Pickup();
+            }
         }
 
         public void Leave(Parent parent, Child child)
         {
-            throw new NotImplementedException();
+            Raise(ChildLeftDomainEvent.Create(this, child.Id));
+        }
+
+        private void When(ChildLeftDomainEvent domainEvent)
+        {
+            foreach (Child child in children)
+            {
+                if (child.Id == domainEvent.ChildId)
+                    child.Left();
+            }
         }
 
         public void CheckIn(Teacher teacher, Child child)
         {
-            throw new NotImplementedException();
+            Raise(ChildCheckedInDomainEvent.Create(
+                this, child.Id));
         }
 
-        public void CheckOut(Teacher teacher, Child childId)
+        private void When(ChildCheckedInDomainEvent domainEvent)
         {
-            throw new NotImplementedException();
+            foreach (Child child in children)
+            {
+                if (child.Id == domainEvent.ChildId)
+                    child.CheckIn();
+            }
+        }
+
+        public void CheckOut(Teacher teacher, Child child)
+        {
+            Raise(ChildCheckedOutDomainEvent.Create(
+                this, child.Id));
+        }
+
+        private void When(ChildCheckedOutDomainEvent domainEvent)
+        {
+            foreach (Child child in children)
+            {
+                if (child.Id == domainEvent.ChildId)
+                    child.CheckOut();
+            }
         }
 
         public void AddTeacher(Teacher teacher)
@@ -141,7 +184,8 @@ namespace Jambo.Domain.Model.Schools
             Child child = Child.Create(
                 domainEvent.ChildId,
                 domainEvent.Name,
-                domainEvent.BirthDate);
+                domainEvent.BirthDate,
+                Custody.Create(CustodyEnum.ChildConfirmedWithFamily));
 
             children.Add(child);
 

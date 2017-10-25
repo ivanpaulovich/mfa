@@ -26,7 +26,8 @@ namespace Jambo.Producer.Application.CommandHandlers.Children
 
             Child child = Child.Create(
                 Name.Create(command.Name), 
-                BirthDate.Create(command.BirthDate));
+                BirthDate.Create(command.BirthDate),
+                Custody.Create(CustodyEnum.ChildConfirmedWithFamily));
 
             school.AddChild(parent, child);
 
