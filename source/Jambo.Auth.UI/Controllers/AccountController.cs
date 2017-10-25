@@ -31,7 +31,7 @@ namespace Jambo.Auth.UI
             // se loginCommand.Username e loginCommand.Password são válidos.
             //
 
-            var token = GetJwtSecurityToken(loginCommand.Username);
+            var token = GetJwtSecurityToken(loginCommand);
 
             return Ok(new
             {
@@ -40,12 +40,12 @@ namespace Jambo.Auth.UI
             });
         }
 
-        private JwtSecurityToken GetJwtSecurityToken(Guid userId, string user)
+        private JwtSecurityToken GetJwtSecurityToken(LoginCommand user)
         {
             return new JwtSecurityToken(
                 config.Issuer,
                 config.Issuer,
-                GetTokenClaims(userId, user),
+                GetTokenClaims(user),
                 expires: DateTime.UtcNow.AddDays(1),
                 signingCredentials: new SigningCredentials(
                     new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.SecretKey)),
@@ -53,15 +53,13 @@ namespace Jambo.Auth.UI
             );
         }
 
-        private static IEnumerable<Claim> GetTokenClaims(Guid userId, string user)
+        private static IEnumerable<Claim> GetTokenClaims(LoginCommand user)
         {
             return new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
-                new Claim(ClaimTypes.Name, user),
-                new Claim(JwtRegisteredClaimNames.Jti, userId.ToString()),
-                new Claim(JwtRegisteredClaimNames.Sub, user)
+                new Claim(JwtRegisteredClaimNames.Jti, user.UserId.ToString()),
+                new Claim(JwtRegisteredClaimNames.Sub, user.UserId.ToString()),
+                new Claim(ClaimTypes.GroupSid, user.SchoolId.ToString()),
             };
         }
     }
-}
