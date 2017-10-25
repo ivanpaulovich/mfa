@@ -7,8 +7,11 @@ using System.Text;
 namespace Jambo.Producer.Application.Commands.Children
 {
     [DataContract]
-    public class LeaveInCommand : CommandBase, IRequest<Guid>
+    public class LeaveInCommand : CommandBase, IRequest
     {
+        [DataMember]
+        public Guid SchooId { get; private set; }
+
         [DataMember]
         public Guid ChildId { get; private set; }
 

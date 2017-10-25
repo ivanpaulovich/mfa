@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Jambo.Producer.Application.CommandHandlers.Children
 {
-    public class PickCommandHandler : IAsyncRequestHandler<CheckOutCommand, Guid>
+    public class PickCommandHandler : IAsyncRequestHandler<CheckOutCommand>
     {
         private readonly IPublisher bus;
         private readonly ISchoolReadOnlyRepository schoolRepository;
@@ -18,15 +18,15 @@ namespace Jambo.Producer.Application.CommandHandlers.Children
             this.schoolRepository = schoolRepository ?? throw new ArgumentNullException(nameof(schoolRepository));
         }
 
-        public async Task<Guid> Handle(CheckOutCommand command)
+        public async Task Handle(CheckOutCommand command)
         {
-            School school = await schoolRepository.GetSchoolByTeacherId(command.Header.UserId);
-            Child child = await schoolRepository.GetChildById(command.ChildId);
-            school.PickChild(command.ChildId);
+            School school = await schoolRepository.GetSchool(command.SchoolId);
+            Parent parent = await schoolRepository.GetParent(command.SchoolId, command.Header.UserId);
+            Child child = await schoolRepository.GetChild(command.SchoolId, command.ChildId);
+
+            school.Pick(parent, child);
 
             await bus.Publish(school.GetEvents(), command.Header);
-
-            return school.Id;
         }
     }
 }

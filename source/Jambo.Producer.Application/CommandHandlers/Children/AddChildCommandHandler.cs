@@ -8,31 +8,32 @@ using System.Threading.Tasks;
 
 namespace Jambo.Producer.Application.CommandHandlers.Children
 {
-    public class CreateCommandHandler : IAsyncRequestHandler<CreateCommand, Guid>
+    public class AddChildCommandHandler : IAsyncRequestHandler<AddChildCommand, Child>
     {
         private readonly IPublisher bus;
         private readonly ISchoolReadOnlyRepository schoolRepository;
 
-        public CreateCommandHandler(IPublisher bus, ISchoolReadOnlyRepository schoolRepository)
+        public AddChildCommandHandler(IPublisher bus, ISchoolReadOnlyRepository schoolRepository)
         {
             this.bus = bus ?? throw new ArgumentNullException(nameof(bus));
             this.schoolRepository = schoolRepository ?? throw new ArgumentNullException(nameof(schoolRepository));
         }
 
-        public async Task<Guid> Handle(CreateCommand command)
+        public async Task<Child> Handle(AddChildCommand command)
         {
-            School school = await schoolRepository.GetSchoolByTeacherId(command.Header.UserId);
-            Parent parent = await schoolRepository.GetParentById(command.ParentId);
+            School school = await schoolRepository.GetSchool(command.SchoolId);
+            Parent parent = await schoolRepository.GetParent(command.SchoolId, command.ParentId);
 
             Child child = Child.Create(
                 Name.Create(command.Name), 
-                BirthDate.Create(command.BirthDate));
+                BirthDate.Create(command.BirthDate),
+                Custody.Create(CustodyEnum.ChildConfirmedWithFamily));
 
             school.AddChild(parent, child);
 
             await bus.Publish(school.GetEvents(), command.Header);
 
-            return school.Id;
+            return child;
         }
     }
 }

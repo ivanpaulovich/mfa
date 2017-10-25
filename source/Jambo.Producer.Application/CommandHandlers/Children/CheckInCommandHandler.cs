@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Jambo.Producer.Application.CommandHandlers.Teachers
 {
-    public class CheckInCommandHandler : IAsyncRequestHandler<CheckInCommand, Guid>
+    public class CheckInCommandHandler : IAsyncRequestHandler<CheckInCommand>
     {
         private readonly IPublisher bus;
         private readonly ISchoolReadOnlyRepository schoolRepository;
@@ -18,17 +18,15 @@ namespace Jambo.Producer.Application.CommandHandlers.Teachers
             this.schoolRepository = schoolRepository ?? throw new ArgumentNullException(nameof(schoolRepository));
         }
 
-        public async Task<Guid> Handle(CheckInCommand command)
+        public async Task Handle(CheckInCommand command)
         {
-            School school = await schoolRepository.GetSchoolByChildId(command.ChildId);
-            Parent parent = await schoolRepository.GetParentById(command.Header.UserId);
-            Child child = await schoolRepository.GetChildById(command.ChildId);
+            School school = await schoolRepository.GetSchool(command.SchoolId);
+            Teacher teacher = await schoolRepository.GetTeacher(command.SchoolId, command.Header.UserId);
+            Child child = await schoolRepository.GetChild(command.SchoolId, command.ChildId);
 
-            school.CheckIn(parent, child);
+            school.CheckIn(teacher, child);
 
             await bus.Publish(school.GetEvents(), command.Header);
-
-            return school.Id;
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Jambo.Domain.Model.Schools.Events;
 using Jambo.Domain.Model.ValueTypes;
-using System;
 using System.Collections.Generic;
 
 namespace Jambo.Domain.Model.Schools
@@ -11,6 +10,7 @@ namespace Jambo.Domain.Model.Schools
         private Teacher manager;
         private List<Parent> parents;
         private List<Teacher> teachers;
+        private List<Child> children;
 
         public Name GetName()
         {
@@ -22,9 +22,31 @@ namespace Jambo.Domain.Model.Schools
             return manager;
         }
 
+        public IReadOnlyCollection<Parent> GetParents()
+        {
+            return parents;
+        }
+
+        public IReadOnlyCollection<Teacher> GetTeachers()
+        {
+            return teachers;
+        }
+
+        public IReadOnlyCollection<Child> GetChildren()
+        {
+            return children;
+        }
+
         private School()
         {
             Register<SchoolCreatedDomainEvent>(When);
+            Register<TeacherAddedDomainEvent>(When);
+            Register<ParentAddedDomainEvent>(When);
+            Register<ChildAddedDomainEvent>(When);
+            Register<ChildCheckedInDomainEvent>(When);
+            Register<ChildCheckedOutDomainEvent>(When);
+            Register<ChildLeftDomainEvent>(When);
+            Register<ChildPickedUpDomainEvent>(When);
         }
 
         public static School Create()
@@ -54,59 +76,124 @@ namespace Jambo.Domain.Model.Schools
             manager = Teacher.Create(domainEvent.ManagerId, domainEvent.ManagerName);
         }
 
-        public void PickChild(Guid childId)
+        public void Pick(Parent parent, Child child)
         {
-
+            Raise(ChildPickedUpDomainEvent.Create(
+                this, child.Id));
         }
 
-        public void LeaveChild(Guid childId)
+        private void When(ChildPickedUpDomainEvent domainEvent)
         {
-            throw new NotImplementedException();
+            foreach (Child child in children)
+            {
+                if (child.Id == domainEvent.ChildId)
+                    child.Pickup();
+            }
         }
 
-        public void CheckInChild(Guid childId)
+        public void Leave(Parent parent, Child child)
         {
-
+            Raise(ChildLeftDomainEvent.Create(this, child.Id));
         }
 
-        public void CheckOutChild(Guid childId)
+        private void When(ChildLeftDomainEvent domainEvent)
         {
-
+            foreach (Child child in children)
+            {
+                if (child.Id == domainEvent.ChildId)
+                    child.Left();
+            }
         }
 
-        public void CheckOutChild(Guid userId, Guid childId)
+        public void CheckIn(Teacher teacher, Child child)
         {
-            throw new NotImplementedException();
+            Raise(ChildCheckedInDomainEvent.Create(
+                this, child.Id));
         }
 
-        public void CheckIn(Parent parent, Child child)
+        private void When(ChildCheckedInDomainEvent domainEvent)
         {
-            throw new NotImplementedException();
+            foreach (Child child in children)
+            {
+                if (child.Id == domainEvent.ChildId)
+                    child.CheckIn();
+            }
+        }
+
+        public void CheckOut(Teacher teacher, Child child)
+        {
+            Raise(ChildCheckedOutDomainEvent.Create(
+                this, child.Id));
+        }
+
+        private void When(ChildCheckedOutDomainEvent domainEvent)
+        {
+            foreach (Child child in children)
+            {
+                if (child.Id == domainEvent.ChildId)
+                    child.CheckOut();
+            }
         }
 
         public void AddTeacher(Teacher teacher)
         {
-            throw new NotImplementedException();
+            Raise(TeacherAddedDomainEvent.Create(this, teacher.Id, teacher.GetName()));
+        }
+
+        private void When(TeacherAddedDomainEvent domainEvent)
+        {
+            teachers = teachers ?? new List<Teacher>();
+            Teacher teacher = Teacher.Create(domainEvent.TeacherId, domainEvent.TeacherName);
+
+            teachers.Add(teacher);
         }
 
         public void AddParent(Parent parent)
         {
-            throw new NotImplementedException();
+            Raise(ParentAddedDomainEvent.Create(this, parent.Id, 
+                parent.GetName(), 
+                parent.GetIdentification(), 
+                parent.GetBirthDate()));
         }
 
-        public void Start()
+        private void When(ParentAddedDomainEvent domainEvent)
         {
-            throw new NotImplementedException();
-        }
+            parents = parents ?? new List<Parent>();
+            Parent parent = Parent.Create(
+                domainEvent.ParentId, 
+                domainEvent.Name,
+                domainEvent.Identification,
+                domainEvent.BirthDate);
 
-        public void CheckOut(Parent parent, Child child)
-        {
-            throw new NotImplementedException();
+            parents.Add(parent);
         }
 
         public void AddChild(Parent parent, Child child)
         {
-            throw new NotImplementedException();
+            Raise(ChildAddedDomainEvent.Create(this,  
+                parent.Id,
+                child.Id,
+                child.GetName(),
+                child.GetBirthDate()));
+        }
+
+        private void When(ChildAddedDomainEvent domainEvent)
+        {
+            children = children ?? new List<Child>();
+
+            Child child = Child.Create(
+                domainEvent.ChildId,
+                domainEvent.Name,
+                domainEvent.BirthDate,
+                Custody.Create(CustodyEnum.ChildConfirmedWithFamily));
+
+            children.Add(child);
+
+            foreach (Parent parent in parents)
+            {
+                if (parent.Id == domainEvent.ParentId)
+                    parent.AddChild(child);
+            }
         }
     }
 }

@@ -7,21 +7,60 @@ namespace Jambo.Domain.Model.Schools
     public class Parent : Entity
     {
         private Name name;
+        private Identification identification;
+        private BirthDate birthDate;
         private List<Child> children;
+
+        public Name GetName()
+        {
+            return name;
+        }
+
+        public Identification GetIdentification()
+        {
+            return identification;
+        }
+
+        public BirthDate GetBirthDate()
+        {
+            return birthDate;
+        }
+
+        public IReadOnlyCollection<Child> GetChildren()
+        {
+            return children;
+        }
 
         private Parent()
         {
 
         }
 
-        public static Parent Create()
-        {
-            return new Parent();
-        }
-
         public static Parent Create(Name name, Identification identification, BirthDate birthDate)
         {
-            throw new NotImplementedException();
+            Parent parent = new Parent();
+            parent.name = name;
+            parent.identification = identification;
+            parent.birthDate = birthDate;
+
+            return parent;
+        }
+
+        public static Parent Create(Guid id, Name name, Identification identification, BirthDate birthDate)
+        {
+            Parent parent = new Parent();
+            parent.Id = id;
+            parent.name = name;
+            parent.identification = identification;
+            parent.birthDate = birthDate;
+
+            return parent;
+        }
+
+        public void AddChild(Child child)
+        {
+            children = children ?? new List<Child>();
+            children.Add(child);
         }
     }
 }

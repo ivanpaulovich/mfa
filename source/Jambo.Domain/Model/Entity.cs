@@ -8,6 +8,7 @@ namespace Jambo.Domain.Model
 
         public Entity()
         {
+            Id = Guid.NewGuid();
         }
     }
 }

@@ -4,24 +4,24 @@ using System.Text;
 
 namespace Jambo.Domain.Model.Schools.Events
 {
-    public class ChildCheckdInDomainEvent : DomainEvent
+    public class ChildCheckedOutDomainEvent : DomainEvent
     {
         public Guid ChildId { get; private set; }
 
-        public ChildCheckdInDomainEvent(Guid aggregateRootId, int version,
+        public ChildCheckedOutDomainEvent(Guid aggregateRootId, int version,
             DateTime createdDate, Header header, Guid childId)
             : base(aggregateRootId, version, createdDate, header)
         {
             ChildId = childId;
         }
 
-        public static ChildCheckdInDomainEvent Create(AggregateRoot aggregateRoot,
+        public static ChildCheckedOutDomainEvent Create(AggregateRoot aggregateRoot,
             Guid childId)
         {
             if (aggregateRoot == null)
                 throw new ArgumentNullException("aggregateRoot");
 
-            ChildCheckdInDomainEvent domainEvent = new ChildCheckdInDomainEvent(
+            ChildCheckedOutDomainEvent domainEvent = new ChildCheckedOutDomainEvent(
                 aggregateRoot.Id, aggregateRoot.Version, DateTime.UtcNow, null, childId);
 
             return domainEvent;

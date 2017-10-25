@@ -28,6 +28,7 @@ namespace Jambo.Producer.Infrastructure
                 options.Filters.Add(typeof(DomainExceptionFilter));
                 options.Filters.Add(typeof(ValidateModelAttribute));
                 options.Filters.Add(typeof(CorrelationFilter));
+                options.Filters.Add(typeof(SchoolFilter));
             });
 
             services.AddSwaggerGen(options =>

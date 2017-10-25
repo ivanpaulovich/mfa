@@ -2,24 +2,24 @@
 
 namespace Jambo.Domain.Model.Schools.Events
 {
-    public class ChildPickedDomainEvent : DomainEvent
+    public class ChildLeftDomainEvent : DomainEvent
     {
         public Guid ChildId { get; private set; }
 
-        public ChildPickedDomainEvent(Guid aggregateRootId, int version,
+        public ChildLeftDomainEvent(Guid aggregateRootId, int version,
             DateTime createdDate, Header header, Guid childId)
             : base(aggregateRootId, version, createdDate, header)
         {
             ChildId = childId;
         }
 
-        public static ChildPickedDomainEvent Create(AggregateRoot aggregateRoot,
+        public static ChildLeftDomainEvent Create(AggregateRoot aggregateRoot,
             Guid childId)
         {
             if (aggregateRoot == null)
                 throw new ArgumentNullException("aggregateRoot");
 
-            ChildPickedDomainEvent domainEvent = new ChildPickedDomainEvent(
+            ChildLeftDomainEvent domainEvent = new ChildLeftDomainEvent(
                 aggregateRoot.Id, aggregateRoot.Version, DateTime.UtcNow, null, childId);
 
             return domainEvent;

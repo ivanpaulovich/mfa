@@ -40,20 +40,21 @@ namespace Jambo.Producer.UI.Controllers
             return CreatedAtRoute("GetSchoool", new { id = createdSchool.Id }, result);
         }
 
-        [HttpGet("{id}", Name = "GetSchoool")]
-        public async Task<IActionResult> Get(Guid id)
+        [HttpGet(Name = "GetSchoool")]
+        public async Task<IActionResult> Get(Guid schoolId)
         {
-            var school = await queries.GetSchoolAsync(id);
+            var school = await queries.GetSchoolAsync(schoolId);
 
             return Ok(school);
         }
 
-        //[HttpPatch("Create")]
-        //public async Task<IActionResult> Create([FromBody] Application.Commands.Schools.CreateCommand command)
-        //{
-        //    await mediator.Send(command);
-        //    return (IActionResult)Ok();
-        //}
+        [HttpGet("All")]
+        public async Task<IActionResult> Get()
+        {
+            var schools = await queries.GetSchoolsAsync();
+
+            return Ok(schools);
+        }
 
         //[HttpPatch("Disable")]
         //public async Task<IActionResult> Disable([FromBody]DisableSchoolCommand command)

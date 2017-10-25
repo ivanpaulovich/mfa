@@ -1,11 +1,12 @@
 ﻿using MediatR;
 using System.Runtime.Serialization;
 using System;
+using Jambo.Domain.Model.Schools;
 
 namespace Jambo.Producer.Application.Commands.Teachers
 {
     [DataContract]
-    public class AddTeacherCommand : CommandBase, IRequest<Guid>
+    public class AddTeacherCommand : CommandBase, IRequest<Teacher>
     {
         [DataMember]
         public Guid SchoolId { get; private set; }

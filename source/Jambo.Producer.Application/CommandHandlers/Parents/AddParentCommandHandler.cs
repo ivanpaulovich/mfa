@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace Jambo.Producer.Application.CommandHandlers.Parents
 {
-    public class CreateCommandHandler : IAsyncRequestHandler<CreateCommand, Guid>
+    public class AddParentCommandHandler : IAsyncRequestHandler<AddParentCommand, Parent>
     {
         private readonly IPublisher bus;
         private readonly ISchoolReadOnlyRepository schoolRepository;
 
-        public CreateCommandHandler(IPublisher bus, ISchoolReadOnlyRepository schoolRepository)
+        public AddParentCommandHandler(IPublisher bus, ISchoolReadOnlyRepository schoolRepository)
         {
             this.bus = bus ?? throw new ArgumentNullException(nameof(bus));
             this.schoolRepository = schoolRepository ?? throw new ArgumentNullException(nameof(schoolRepository));
         }
 
-        public async Task<Guid> Handle(CreateCommand command)
+        public async Task<Parent> Handle(AddParentCommand command)
         {
-            School school = await schoolRepository.GetSchoolByTeacherId(command.Header.UserId);
+            School school = await schoolRepository.GetSchool(command.SchoolId);
             Parent parent = Parent.Create(
                 Name.Create(command.Name), 
                 Identification.Create(command.Identification),
@@ -31,7 +31,7 @@ namespace Jambo.Producer.Application.CommandHandlers.Parents
 
             await bus.Publish(school.GetEvents(), command.Header);
 
-            return school.Id;
+            return parent;
         }
     }
 }
