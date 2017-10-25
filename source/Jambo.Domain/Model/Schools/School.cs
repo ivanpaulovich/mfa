@@ -23,6 +23,21 @@ namespace Jambo.Domain.Model.Schools
             return manager;
         }
 
+        public IReadOnlyCollection<Parent> GetParents()
+        {
+            return parents;
+        }
+
+        public IReadOnlyCollection<Teacher> GetTeachers()
+        {
+            return teachers;
+        }
+
+        public IReadOnlyCollection<Child> GetChildren()
+        {
+            return children;
+        }
+
         private School()
         {
             Register<SchoolCreatedDomainEvent>(When);
@@ -57,32 +72,22 @@ namespace Jambo.Domain.Model.Schools
             manager = Teacher.Create(domainEvent.ManagerId, domainEvent.ManagerName);
         }
 
-        public void PickChild(Guid childId)
-        {
-
-        }
-
-        public void LeaveChild(Guid childId)
+        public void Pick(Parent parent, Child child)
         {
             throw new NotImplementedException();
         }
 
-        public void CheckInChild(Guid childId)
-        {
-
-        }
-
-        public void CheckOutChild(Guid childId)
-        {
-
-        }
-
-        public void CheckOutChild(Guid userId, Guid childId)
+        public void Leave(Parent parent, Child child)
         {
             throw new NotImplementedException();
         }
 
-        public void CheckIn(Parent parent, Child child)
+        public void CheckIn(Teacher teacher, Child child)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CheckOut(Teacher teacher, Child childId)
         {
             throw new NotImplementedException();
         }
@@ -118,16 +123,6 @@ namespace Jambo.Domain.Model.Schools
                 domainEvent.BirthDate);
 
             parents.Add(parent);
-        }
-
-        public void Start()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void CheckOut(Parent parent, Child child)
-        {
-            throw new NotImplementedException();
         }
 
         public void AddChild(Parent parent, Child child)

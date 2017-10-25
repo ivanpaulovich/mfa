@@ -22,7 +22,7 @@ namespace Jambo.Producer.Application.CommandHandlers.Children
         public async Task<Child> Handle(AddChildCommand command)
         {
             School school = await schoolRepository.GetSchool(command.SchoolId);
-            Parent parent = await schoolRepository.GetParentById(command.ParentId);
+            Parent parent = await schoolRepository.GetParent(command.SchoolId, command.ParentId);
 
             Child child = Child.Create(
                 Name.Create(command.Name), 

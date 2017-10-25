@@ -1,9 +1,10 @@
-﻿using Jambo.Producer.Application.Queries;
-using MongoDB.Bson;
-using MongoDB.Bson.IO;
+﻿using Jambo.Domain.Exceptions;
+using Jambo.Producer.Application.Queries;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Jambo.Producer.Infrastructure.Queries
@@ -11,11 +12,11 @@ namespace Jambo.Producer.Infrastructure.Queries
     public class SchoolQueries : ISchoolQueries
     {
         private readonly IMongoDatabase database;
-        public IMongoCollection<BsonDocument> Schools
+        public IMongoCollection<ExpandoObject> Schools
         {
             get
             {
-                return database.GetCollection<BsonDocument>("Schools");
+                return database.GetCollection<ExpandoObject>("Schools");
             }
         }
 
@@ -25,96 +26,73 @@ namespace Jambo.Producer.Infrastructure.Queries
             this.database = mongoClient.GetDatabase(databaseName);
         }
 
-        public async Task<string> GetSchoolsAsync()
+        public async Task<IEnumerable<ExpandoObject>> GetSchoolsAsync()
         {
-            IEnumerable<BsonDocument> result = await Schools
+            var result = await Schools
                 .Find(e => true)
                 .ToListAsync();
 
-            var jsonWriterSettings = new JsonWriterSettings {
-                OutputMode = JsonOutputMode.Shell,
-                Indent = true
-            };
-
-            return result.ToJson(jsonWriterSettings);
+            return result;
         }
 
-        public async Task<string> GetSchoolAsync(Guid id)
+        public async Task<ExpandoObject> GetSchoolAsync(Guid id)
         {
-            BsonDocument result = await Schools
-                .Find(Builders<BsonDocument>
-                .Filter.Eq("_id", id))
-                .Project(Builders<BsonDocument>.Projection
-                    .Include("name")
-                    .Include("manager"))
+            var result = await Schools
+                .Find(Builders<ExpandoObject>.Filter.Eq("_id", id))
                 .SingleAsync();
 
-            var jsonWriterSettings = new JsonWriterSettings
-            {
-                OutputMode = JsonOutputMode.Shell,
-                Indent = true
-            };
-
-            return result.ToJson(jsonWriterSettings);
+            return result;
         }
 
-        public async Task<string> GetTeacherAsync(Guid schoolId, Guid id)
+        public async Task<ExpandoObject> GetTeacherAsync(Guid schoolId, Guid id)
         {
-            BsonDocument result = await Schools
-                .Find(Builders<BsonDocument>
-                .Filter.Eq("teachers._id", id))
-                .Project(Builders<BsonDocument>.Projection.Exclude("_id")
-                    .Include("teachers._id")
-                    .Include("teachers.name"))
+            dynamic result = await Schools
+                .Find(Builders<ExpandoObject>.Filter.Eq("teachers._id", id))
                 .SingleAsync();
 
-            var jsonWriterSettings = new JsonWriterSettings
-            {
-                OutputMode = JsonOutputMode.Shell,
-                Indent = true
-            };
+            dynamic teachers = result.teachers;
 
-            return result.ToJson(jsonWriterSettings);
+            foreach (var item in teachers)
+            {
+                if (item._id == id)
+                    return item;
+            }
+
+            throw new JamboException("Objeto não existe");
         }
 
-        public async Task<string> GetChildAsync(Guid schoolId, Guid id)
+        public async Task<ExpandoObject> GetChildAsync(Guid schoolId, Guid id)
         {
-            BsonDocument result = await Schools
-                .Find(Builders<BsonDocument>
-                .Filter.Eq("children._id", id))
-                .Project(Builders<BsonDocument>.Projection.Exclude("_id")
-                    .Include("children._id")
-                    .Include("children.name")
-                    .Include("children.birthDate"))
+            dynamic result = await Schools
+                .Find(Builders<ExpandoObject>.Filter.Eq("children._id", id))
                 .SingleAsync();
 
-            var jsonWriterSettings = new JsonWriterSettings
-            {
-                OutputMode = JsonOutputMode.Shell,
-                Indent = true
-            };
+            dynamic children = result.children;
 
-            return result.ToJson(jsonWriterSettings);
+            foreach (var item in children)
+            {
+                if (item._id == id)
+                    return item;
+            }
+
+            throw new JamboException("Objeto não existe");
         }
 
-        public async Task<string> GetParentAsync(Guid schoolId, Guid id)
+        public async Task<ExpandoObject> GetParentAsync(Guid schoolId, Guid id)
         {
-            BsonDocument result = await Schools
-                .Find(Builders<BsonDocument>.Filter.Eq("parents._id", id))
-                .Project(Builders<BsonDocument>.Projection.Exclude("_id")
-                    .Include("parents._id")
-                    .Include("parents.name")
-                    .Include("parents.identification")
-                    .Include("parents.birthDate"))
+            dynamic result = await Schools
+                .Find(Builders<ExpandoObject>.Filter.Eq("parents._id", id))
                 .SingleAsync();
 
-            var jsonWriterSettings = new JsonWriterSettings
-            {
-                OutputMode = JsonOutputMode.Shell,
-                Indent = true
-            };
+            dynamic parents = result.parents;
 
-            return result.ToJson(jsonWriterSettings);
+            foreach (var item in parents)
+            {
+                if (item._id == id)
+                    return item;
+            }
+
+            throw new JamboException("Objeto não existe");
         }
     }
 }

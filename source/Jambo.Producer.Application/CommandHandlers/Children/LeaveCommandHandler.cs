@@ -10,7 +10,7 @@ using Jambo.Producer.Application.Commands.Children;
 
 namespace Jambo.Producer.Application.CommandHandlers.Children
 {
-    public class LeaveCommandHandler : IAsyncRequestHandler<LeaveInCommand, Guid>
+    public class LeaveCommandHandler : IAsyncRequestHandler<LeaveInCommand>
     {
         private readonly IPublisher bus;
         private readonly ISchoolReadOnlyRepository schoolRepository;
@@ -21,15 +21,15 @@ namespace Jambo.Producer.Application.CommandHandlers.Children
             this.schoolRepository = schoolRepository ?? throw new ArgumentNullException(nameof(schoolRepository));
         }
 
-        public async Task<Guid> Handle(LeaveInCommand command)
+        public async Task Handle(LeaveInCommand command)
         {
-            School school = await schoolRepository.GetSchoolByTeacherId(command.Header.UserId);
-            Child child = await schoolRepository.GetChildById(command.ChildId);
-            school.LeaveChild(command.ChildId);
+            School school = await schoolRepository.GetSchool(command.SchooId);
+            Parent parent = await schoolRepository.GetParent(command.SchooId, command.Header.UserId);
+            Child child = await schoolRepository.GetChild(command.SchooId, command.ChildId);
+
+            school.Leave(parent, child);
 
             await bus.Publish(school.GetEvents(), command.Header);
-
-            return school.Id;
         }
     }
 }

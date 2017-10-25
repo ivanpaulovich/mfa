@@ -5,8 +5,11 @@ using System.Runtime.Serialization;
 namespace Jambo.Producer.Application.Commands.Children
 {
     [DataContract]
-    public class CheckOutCommand : CommandBase, IRequest<Guid>
+    public class CheckOutCommand : CommandBase, IRequest
     {
+        [DataMember]
+        public Guid SchoolId { get; private set; }
+
         [DataMember]
         public Guid ChildId { get; private set; }
 
