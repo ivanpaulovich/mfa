@@ -10,7 +10,7 @@ namespace Jambo.Producer.Application.Commands.Children
     public class LeaveInCommand : CommandBase, IRequest
     {
         [DataMember]
-        public Guid SchooId { get; private set; }
+        public Guid SchoolId { get; private set; }
 
         [DataMember]
         public Guid ChildId { get; private set; }

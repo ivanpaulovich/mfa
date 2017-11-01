@@ -23,9 +23,9 @@ namespace Jambo.Producer.Application.CommandHandlers.Children
 
         public async Task Handle(LeaveInCommand command)
         {
-            School school = await schoolRepository.GetSchool(command.SchooId);
-            Parent parent = await schoolRepository.GetParent(command.SchooId, command.Header.UserId);
-            Child child = await schoolRepository.GetChild(command.SchooId, command.ChildId);
+            School school = await schoolRepository.GetSchool(command.SchoolId);
+            Parent parent = await schoolRepository.GetParent(command.SchoolId, command.Header.UserId);
+            Child child = await schoolRepository.GetChild(command.SchoolId, command.ChildId);
 
             school.Leave(parent, child);
 
