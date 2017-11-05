@@ -1,0 +1,128 @@
+[
+  {
+    "topic": "mfav01",
+    "key": "Jambo.Domain.Model.Schools.Events.SchoolCreatedDomainEvent, Jambo.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "value": "{\r\n  \"SchoolName\": {\r\n    \"Text\": \"UniBH\"\r\n  },\r\n  \"ManagerId\": \"a9f186a5-f152-4c90-a6ae-e411f7d65402\",\r\n  \"ManagerName\": {\r\n    \"Text\": \"Samara\"\r\n  },\r\n  \"AggregateRootId\": \"11da6841-6c83-490e-af98-b829e212129e\",\r\n  \"Version\": 0,\r\n  \"CreatedDate\": \"2017-11-01T11:58:04.5246116Z\",\r\n  \"Header\": {\r\n    \"CorrelationId\": \"d311dc49-4fb8-40d4-8224-21224962178f\",\r\n    \"UserId\": \"a9f186a5-f152-4c90-a6ae-e411f7d65402\",\r\n    \"UserName\": \"Samara\"\r\n  }\r\n}",
+    "partition": 0,
+    "offset": 0
+  },
+  {
+    "topic": "mfav01",
+    "key": "Jambo.Domain.Model.Schools.Events.ParentAddedDomainEvent, Jambo.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "value": "{\r\n  \"ParentId\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\",\r\n  \"Name\": {\r\n    \"Text\": \"AndrÃ© Paulovich\"\r\n  },\r\n  \"Identification\": {\r\n    \"Text\": \"MG13445515\"\r\n  },\r\n  \"BirthDate\": {\r\n    \"Value\": \"1986-11-01T12:03:36.813Z\"\r\n  },\r\n  \"AggregateRootId\": \"11da6841-6c83-490e-af98-b829e212129e\",\r\n  \"Version\": 1,\r\n  \"CreatedDate\": \"2017-11-01T12:04:32.269312Z\",\r\n  \"Header\": {\r\n    \"CorrelationId\": \"eff866fd-ddc1-419f-8e75-055fc24eb27e\",\r\n    \"UserId\": \"a9f186a5-f152-4c90-a6ae-e411f7d65402\",\r\n    \"UserName\": \"a9f186a5-f152-4c90-a6ae-e411f7d65402\"\r\n  }\r\n}",
+    "partition": 0,
+    "offset": 1
+  },
+  {
+    "topic": "mfav01",
+    "key": "Jambo.Domain.Model.Schools.Events.ChildAddedDomainEvent, Jambo.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "value": "{\r\n  \"ParentId\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\",\r\n  \"ChildId\": \"149ac185-6d85-43f8-b483-bdea7016c364\",\r\n  \"Name\": {\r\n    \"Text\": \"Marina Paulovich\"\r\n  },\r\n  \"BirthDate\": {\r\n    \"Value\": \"2017-11-01T12:03:36.791Z\"\r\n  },\r\n  \"AggregateRootId\": \"11da6841-6c83-490e-af98-b829e212129e\",\r\n  \"Version\": 2,\r\n  \"CreatedDate\": \"2017-11-01T12:08:04.8751889Z\",\r\n  \"Header\": {\r\n    \"CorrelationId\": \"bb08f839-e2ed-480e-879f-e9e42d897620\",\r\n    \"UserId\": \"a9f186a5-f152-4c90-a6ae-e411f7d65402\",\r\n    \"UserName\": \"a9f186a5-f152-4c90-a6ae-e411f7d65402\"\r\n  }\r\n}",
+    "partition": 0,
+    "offset": 2
+  },
+  {
+    "topic": "mfav01",
+    "key": "Jambo.Domain.Model.Schools.Events.TeacherAddedDomainEvent, Jambo.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "value": "{\r\n  \"TeacherId\": \"9f2b5f13-6a55-4e35-b3f5-e539aa7a8ef7\",\r\n  \"TeacherName\": {\r\n    \"Text\": \"Diva de Souza\"\r\n  },\r\n  \"AggregateRootId\": \"11da6841-6c83-490e-af98-b829e212129e\",\r\n  \"Version\": 3,\r\n  \"CreatedDate\": \"2017-11-01T12:25:44.6605037Z\",\r\n  \"Header\": {\r\n    \"CorrelationId\": \"7349e045-c66e-40c2-938e-a456b5dd4162\",\r\n    \"UserId\": \"a9f186a5-f152-4c90-a6ae-e411f7d65402\",\r\n    \"UserName\": \"a9f186a5-f152-4c90-a6ae-e411f7d65402\"\r\n  }\r\n}",
+    "partition": 0,
+    "offset": 3
+  },
+  {
+    "topic": "mfav01",
+    "key": "Jambo.Domain.Model.Schools.Events.ChildLeftDomainEvent, Jambo.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "value": "{\r\n  \"ChildId\": \"149ac185-6d85-43f8-b483-bdea7016c364\",\r\n  \"AggregateRootId\": \"11da6841-6c83-490e-af98-b829e212129e\",\r\n  \"Version\": 4,\r\n  \"CreatedDate\": \"2017-11-01T12:33:29.6330981Z\",\r\n  \"Header\": {\r\n    \"CorrelationId\": \"8d472e6d-dbb6-459a-8e97-2a11d2e3334a\",\r\n    \"UserId\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\",\r\n    \"UserName\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\"\r\n  }\r\n}",
+    "partition": 0,
+    "offset": 4
+  },
+  {
+    "topic": "mfav01",
+    "key": "Jambo.Domain.Model.Schools.Events.ChildLeftDomainEvent, Jambo.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "value": "{\r\n  \"ChildId\": \"149ac185-6d85-43f8-b483-bdea7016c364\",\r\n  \"AggregateRootId\": \"11da6841-6c83-490e-af98-b829e212129e\",\r\n  \"Version\": 5,\r\n  \"CreatedDate\": \"2017-11-01T12:34:54.0047322Z\",\r\n  \"Header\": {\r\n    \"CorrelationId\": \"36188e8c-ac6c-4f21-9e5c-dd0e27eeaa7e\",\r\n    \"UserId\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\",\r\n    \"UserName\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\"\r\n  }\r\n}",
+    "partition": 0,
+    "offset": 5
+  },
+  {
+    "topic": "mfav01",
+    "key": "Jambo.Domain.Model.Schools.Events.ChildLeftDomainEvent, Jambo.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "value": "{\r\n  \"ChildId\": \"149ac185-6d85-43f8-b483-bdea7016c364\",\r\n  \"AggregateRootId\": \"11da6841-6c83-490e-af98-b829e212129e\",\r\n  \"Version\": 6,\r\n  \"CreatedDate\": \"2017-11-01T12:39:16.6566344Z\",\r\n  \"Header\": {\r\n    \"CorrelationId\": \"74596824-70fe-4f0d-a9f1-036c52fa7446\",\r\n    \"UserId\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\",\r\n    \"UserName\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\"\r\n  }\r\n}",
+    "partition": 0,
+    "offset": 6
+  },
+  {
+    "topic": "mfav01",
+    "key": "Jambo.Domain.Model.Schools.Events.ChildPickedUpDomainEvent, Jambo.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "value": "{\r\n  \"ChildId\": \"149ac185-6d85-43f8-b483-bdea7016c364\",\r\n  \"AggregateRootId\": \"11da6841-6c83-490e-af98-b829e212129e\",\r\n  \"Version\": 7,\r\n  \"CreatedDate\": \"2017-11-01T12:49:39.3982788Z\",\r\n  \"Header\": {\r\n    \"CorrelationId\": \"ee91d033-3063-4118-9480-1ea4120faf6a\",\r\n    \"UserId\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\",\r\n    \"UserName\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\"\r\n  }\r\n}",
+    "partition": 0,
+    "offset": 7
+  },
+  {
+    "topic": "mfav01",
+    "key": "Jambo.Domain.Model.Schools.Events.ChildLeftDomainEvent, Jambo.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "value": "{\r\n  \"ChildId\": \"149ac185-6d85-43f8-b483-bdea7016c364\",\r\n  \"AggregateRootId\": \"11da6841-6c83-490e-af98-b829e212129e\",\r\n  \"Version\": 8,\r\n  \"CreatedDate\": \"2017-11-01T13:21:21.6744099Z\",\r\n  \"Header\": {\r\n    \"CorrelationId\": \"e5111565-797a-4ae2-8fbc-996679d54f94\",\r\n    \"UserId\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\",\r\n    \"UserName\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\"\r\n  }\r\n}",
+    "partition": 0,
+    "offset": 8
+  },
+  {
+    "topic": "mfav01",
+    "key": "Jambo.Domain.Model.Schools.Events.ChildPickedUpDomainEvent, Jambo.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "value": "{\r\n  \"ChildId\": \"149ac185-6d85-43f8-b483-bdea7016c364\",\r\n  \"AggregateRootId\": \"11da6841-6c83-490e-af98-b829e212129e\",\r\n  \"Version\": 9,\r\n  \"CreatedDate\": \"2017-11-01T13:21:25.466783Z\",\r\n  \"Header\": {\r\n    \"CorrelationId\": \"d84c1ce3-a00a-4603-9dc8-cf5109443fbd\",\r\n    \"UserId\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\",\r\n    \"UserName\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\"\r\n  }\r\n}",
+    "partition": 0,
+    "offset": 9
+  },
+  {
+    "topic": "mfav01",
+    "key": "Jambo.Domain.Model.Schools.Events.ChildLeftDomainEvent, Jambo.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "value": "{\r\n  \"ChildId\": \"149ac185-6d85-43f8-b483-bdea7016c364\",\r\n  \"AggregateRootId\": \"11da6841-6c83-490e-af98-b829e212129e\",\r\n  \"Version\": 10,\r\n  \"CreatedDate\": \"2017-11-01T13:21:31.2391228Z\",\r\n  \"Header\": {\r\n    \"CorrelationId\": \"81cc2828-60d9-4aa7-b0aa-89a3674ee4f7\",\r\n    \"UserId\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\",\r\n    \"UserName\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\"\r\n  }\r\n}",
+    "partition": 0,
+    "offset": 10
+  },
+  {
+    "topic": "mfav01",
+    "key": "Jambo.Domain.Model.Schools.Events.ChildPickedUpDomainEvent, Jambo.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "value": "{\r\n  \"ChildId\": \"149ac185-6d85-43f8-b483-bdea7016c364\",\r\n  \"AggregateRootId\": \"11da6841-6c83-490e-af98-b829e212129e\",\r\n  \"Version\": 11,\r\n  \"CreatedDate\": \"2017-11-01T13:21:34.2815005Z\",\r\n  \"Header\": {\r\n    \"CorrelationId\": \"9d474d96-63d0-49be-9d59-374a498bdd58\",\r\n    \"UserId\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\",\r\n    \"UserName\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\"\r\n  }\r\n}",
+    "partition": 0,
+    "offset": 11
+  },
+  {
+    "topic": "mfav01",
+    "key": "Jambo.Domain.Model.Schools.Events.ChildLeftDomainEvent, Jambo.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "value": "{\r\n  \"ChildId\": \"149ac185-6d85-43f8-b483-bdea7016c364\",\r\n  \"AggregateRootId\": \"11da6841-6c83-490e-af98-b829e212129e\",\r\n  \"Version\": 12,\r\n  \"CreatedDate\": \"2017-11-01T13:21:37.2377293Z\",\r\n  \"Header\": {\r\n    \"CorrelationId\": \"75e11341-998a-4b45-bf42-038cbc3aeb4f\",\r\n    \"UserId\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\",\r\n    \"UserName\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\"\r\n  }\r\n}",
+    "partition": 0,
+    "offset": 12
+  },
+  {
+    "topic": "mfav01",
+    "key": "Jambo.Domain.Model.Schools.Events.ChildPickedUpDomainEvent, Jambo.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "value": "{\r\n  \"ChildId\": \"149ac185-6d85-43f8-b483-bdea7016c364\",\r\n  \"AggregateRootId\": \"11da6841-6c83-490e-af98-b829e212129e\",\r\n  \"Version\": 13,\r\n  \"CreatedDate\": \"2017-11-01T13:21:39.2899444Z\",\r\n  \"Header\": {\r\n    \"CorrelationId\": \"3e420e0d-7b27-41a2-acf1-0f5d8a53fa79\",\r\n    \"UserId\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\",\r\n    \"UserName\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\"\r\n  }\r\n}",
+    "partition": 0,
+    "offset": 13
+  },
+  {
+    "topic": "mfav01",
+    "key": "Jambo.Domain.Model.Schools.Events.ChildLeftDomainEvent, Jambo.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "value": "{\r\n  \"ChildId\": \"149ac185-6d85-43f8-b483-bdea7016c364\",\r\n  \"AggregateRootId\": \"11da6841-6c83-490e-af98-b829e212129e\",\r\n  \"Version\": 14,\r\n  \"CreatedDate\": \"2017-11-01T13:21:41.3749617Z\",\r\n  \"Header\": {\r\n    \"CorrelationId\": \"f203bc84-96a0-4cc3-9815-dce5ac2f33d6\",\r\n    \"UserId\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\",\r\n    \"UserName\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\"\r\n  }\r\n}",
+    "partition": 0,
+    "offset": 14
+  },
+  {
+    "topic": "mfav01",
+    "key": "Jambo.Domain.Model.Schools.Events.ChildPickedUpDomainEvent, Jambo.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "value": "{\r\n  \"ChildId\": \"149ac185-6d85-43f8-b483-bdea7016c364\",\r\n  \"AggregateRootId\": \"11da6841-6c83-490e-af98-b829e212129e\",\r\n  \"Version\": 15,\r\n  \"CreatedDate\": \"2017-11-01T13:21:42.5690793Z\",\r\n  \"Header\": {\r\n    \"CorrelationId\": \"25892a1f-d22e-451b-ac66-e39c8e6c15cb\",\r\n    \"UserId\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\",\r\n    \"UserName\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\"\r\n  }\r\n}",
+    "partition": 0,
+    "offset": 15
+  },
+  {
+    "topic": "mfav01",
+    "key": "Jambo.Domain.Model.Schools.Events.ChildLeftDomainEvent, Jambo.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "value": "{\r\n  \"ChildId\": \"149ac185-6d85-43f8-b483-bdea7016c364\",\r\n  \"AggregateRootId\": \"11da6841-6c83-490e-af98-b829e212129e\",\r\n  \"Version\": 16,\r\n  \"CreatedDate\": \"2017-11-01T13:21:44.1832046Z\",\r\n  \"Header\": {\r\n    \"CorrelationId\": \"1812935e-1bf9-470b-b32f-4f70b3ec055b\",\r\n    \"UserId\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\",\r\n    \"UserName\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\"\r\n  }\r\n}",
+    "partition": 0,
+    "offset": 16
+  },
+  {
+    "topic": "mfav01",
+    "key": "Jambo.Domain.Model.Schools.Events.ChildPickedUpDomainEvent, Jambo.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "value": "{\r\n  \"ChildId\": \"149ac185-6d85-43f8-b483-bdea7016c364\",\r\n  \"AggregateRootId\": \"11da6841-6c83-490e-af98-b829e212129e\",\r\n  \"Version\": 17,\r\n  \"CreatedDate\": \"2017-11-01T13:21:45.9037029Z\",\r\n  \"Header\": {\r\n    \"CorrelationId\": \"e04ca929-6040-4129-9832-b449681c19aa\",\r\n    \"UserId\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\",\r\n    \"UserName\": \"dd1d8a23-f975-420e-ae54-9d33134b2db2\"\r\n  }\r\n}",
+    "partition": 0,
+    "offset": 17
+  }
+]

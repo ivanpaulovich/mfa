@@ -47,7 +47,7 @@ namespace Jambo.Producer.Infrastructure
 
                 options.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info
                 {
-                    Title = "Blogging HTTP API",
+                    Title = "School HTTP API",
                     Version = "v1",
                     Description = "The Blogging Service HTTP API",
                     TermsOfService = "Terms Of Service"

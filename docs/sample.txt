@@ -1,0 +1,88 @@
+1) Criar escola
+
+{
+  "managerName": "Samara",
+  "schoolName": "UniBH"
+}
+{
+  "schoolId": "11da6841-6c83-490e-af98-b829e212129e",
+  "schoolName": "UniBH",
+  "managerId": "a9f186a5-f152-4c90-a6ae-e411f7d65402",
+  "managerName": "Samara"
+}
+
+2) Autenticação
+
+{
+  "userId": "a9f186a5-f152-4c90-a6ae-e411f7d65402",
+  "schoolId": "11da6841-6c83-490e-af98-b829e212129e"
+}
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJhOWYxODZhNS1mMTUyLTRjOTAtYTZhZS1lNDExZjdkNjU0MDIiLCJzdWIiOiJhOWYxODZhNS1mMTUyLTRjOTAtYTZhZS1lNDExZjdkNjU0MDIiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL2dyb3Vwc2lkIjoiMTFkYTY4NDEtNmM4My00OTBlLWFmOTgtYjgyOWUyMTIxMjllIiwiZXhwIjoxNTA5NjI0MTgxLCJpc3MiOiJodHRwOi8vamFtYm8iLCJhdWQiOiJodHRwOi8vamFtYm8ifQ.I90i8zVc9SjliNe1SUbMZR3CXD0v2HP10lB3Mx48brE",
+  "expiration": "2017-11-02T12:03:01Z"
+}
+
+3) Criar um Pai
+
+{
+  "schoolId": "11da6841-6c83-490e-af98-b829e212129e",
+  "identification": "MG13445515",
+  "name": "André Paulovich",
+  "birthDate": "1986-11-01T12:03:36.813Z"
+}
+
+{
+  "parentId": "dd1d8a23-f975-420e-ae54-9d33134b2db2",
+  "name": "André Paulovich",
+  "identification": "MG13445515",
+  "birthDate": {
+    "value": "1986-11-01T12:03:36.813Z"
+  }
+}
+
+4) Criar uma Criança
+
+{
+  "childId": "149ac185-6d85-43f8-b483-bdea7016c364",
+  "name": "Marina Paulovich",
+  "birthDate": "2017-11-01T12:03:36.791Z"
+}
+
+{
+  "childId": "149ac185-6d85-43f8-b483-bdea7016c364",
+  "name": "Marina Paulovich",
+  "birthDate": "2017-11-01T12:03:36.791Z"
+}
+
+5) Adicionar Professor
+
+{
+  "schoolId": "11da6841-6c83-490e-af98-b829e212129e",
+  "name": "Diva de Souza"
+}
+
+{
+  "teacherId": "9f2b5f13-6a55-4e35-b3f5-e539aa7a8ef7",
+  "name": "Diva de Souza"
+}
+
+
+6) Login de Pai
+
+{
+  "userId": "dd1d8a23-f975-420e-ae54-9d33134b2db2",
+  "schoolId": "11da6841-6c83-490e-af98-b829e212129e"
+}
+
+
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkZDFkOGEyMy1mOTc1LTQyMGUtYWU1NC05ZDMzMTM0YjJkYjIiLCJzdWIiOiJkZDFkOGEyMy1mOTc1LTQyMGUtYWU1NC05ZDMzMTM0YjJkYjIiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL2dyb3Vwc2lkIjoiMTFkYTY4NDEtNmM4My00OTBlLWFmOTgtYjgyOWUyMTIxMjllIiwiZXhwIjoxNTA5NjI1ODczLCJpc3MiOiJodHRwOi8vamFtYm8iLCJhdWQiOiJodHRwOi8vamFtYm8ifQ.v0WeOh9pW6eiP7q5a6XmlOUS-usN5b8aZG9g-AcJ_I8",
+  "expiration": "2017-11-02T12:31:13Z"
+}
+
+7) Deixar  criança
+
+{
+  "schooId": "11da6841-6c83-490e-af98-b829e212129e",
+  "childId": "149ac185-6d85-43f8-b483-bdea7016c364"
+}

@@ -1,0 +1,63 @@
+{
+    "_id" : NUUID("11da6841-6c83-490e-af98-b829e212129e"),
+    "_version" : 8,
+    "name" : {
+        "Text" : "UniBH"
+    },
+    "manager" : {
+        "_id" : NUUID("a9f186a5-f152-4c90-a6ae-e411f7d65402"),
+        "name" : {
+            "Text" : "Samara"
+        }
+    },
+    "teachers" : [ 
+        {
+            "_id" : NUUID("9f2b5f13-6a55-4e35-b3f5-e539aa7a8ef7"),
+            "name" : {
+                "Text" : "Diva de Souza"
+            }
+        }
+    ],
+    "parents" : [ 
+        {
+            "_id" : NUUID("dd1d8a23-f975-420e-ae54-9d33134b2db2"),
+            "name" : {
+                "Text" : "André Paulovich"
+            },
+            "identification" : {
+                "Text" : "MG13445515"
+            },
+            "birthDate" : {
+                "Value" : ISODate("1986-11-01T12:03:36.813Z")
+            },
+            "children" : [ 
+                {
+                    "_id" : NUUID("149ac185-6d85-43f8-b483-bdea7016c364"),
+                    "name" : {
+                        "Text" : "Marina Paulovich"
+                    },
+                    "birthDate" : {
+                        "Value" : ISODate("2017-11-01T12:03:36.791Z")
+                    },
+                    "currentCustody" : {
+                        "Value" : 5
+                    }
+                }
+            ]
+        }
+    ],
+    "children" : [ 
+        {
+            "_id" : NUUID("149ac185-6d85-43f8-b483-bdea7016c364"),
+            "name" : {
+                "Text" : "Marina Paulovich"
+            },
+            "birthDate" : {
+                "Value" : ISODate("2017-11-01T12:03:36.791Z")
+            },
+            "currentCustody" : {
+                "Value" : 3
+            }
+        }
+    ]
+}
